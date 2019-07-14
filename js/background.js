@@ -11,7 +11,7 @@ chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
 
 chrome.webRequest.onBeforeRequest.addListener(
     function (details) {
-        return {redirectUrl: details.url.replace('hqdefault.jpg', 'hq2.jpg')};
+        return {redirectUrl: details.url.replace('hqdefault.jpg', 'hq1.jpg')};
     },
     {
         urls: ['https://i.ytimg.com/vi/*/hqdefault.jpg?*'],
