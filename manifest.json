@@ -3,6 +3,16 @@
   "name": "yt-anti-clickbait",
   "version": "0.1",
   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "css": [
+        "css/youtube.css"
+      ]
+    }
+  ],
   "background": {
     "scripts": [
       "js/background.js"
