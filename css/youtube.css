@@ -1,3 +1,8 @@
 #video-title {
     text-transform: lowercase;
+    display: block !important; /* this might break something in the future, but its needed for the first letter capitalisation */
+}
+
+#video-title::first-letter {
+    text-transform: uppercase;
 }
