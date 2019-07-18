@@ -32,9 +32,10 @@
     "128": "images/get_started128.png"
   },
   "permissions": [
+    "*://www.youtube.com/*",
+    "*://i.ytimg.com/*",
     "webRequest",
     "webRequestBlocking",
-    "tabs",
-    "<all_urls>"
+    "tabs"
   ]
 }
