@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>yt-anti-clickbait options popup</title>
+    <style>
+        .optionsContainer {
+            width: 450px;
+            height: 100px;
+        }
+
+        .optionsContainer div[class^='option-'] {
+            float: left;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        div[class^='option-'] > p {
+            text-align: center;
+        }
+
+        .option-4 {
+            width: 25%;
+        }
+
+        .option-3 {
+            width: 33.33%;
+        }
+    </style>
+</head>
+<body>
+<h3>Where to grab the thumbnail image:</h3>
+<div class="optionsContainer">
+    <div class="option-4">
+        <p>Start of the video</p>
+        <label for="preferred_thumbnail_file_hq1"></label>
+        <input type="radio" value="hq1" id="preferred_thumbnail_file_hq1" name="preferred_thumbnail_file">
+    </div>
+    <div class="option-4">
+        <p>Middle of the video</p>
+        <label for="preferred_thumbnail_file_hq2"></label>
+        <input type="radio" value="hq2" id="preferred_thumbnail_file_hq2" name="preferred_thumbnail_file">
+    </div>
+    <div class="option-4">
+        <p>End of the video</p>
+        <label for="preferred_thumbnail_file_hq3"></label>
+        <input type="radio" value="hq3" id="preferred_thumbnail_file_hq3" name="preferred_thumbnail_file">
+    </div>
+    <div class="option-4">
+        <p>Do not modify</p>
+        <label for="preferred_thumbnail_file_default"></label>
+        <input type="radio" value="default" id="preferred_thumbnail_file_default" name="preferred_thumbnail_file">
+    </div>
+</div>
+
+<h3>How to format the video titles:</h3>
+<div class="optionsContainer">
+    <div class="option-3">
+        <p>lowercase</p>
+        <label for="video_title_format_lowercase"></label>
+        <input type="radio" value="lowercase" id="video_title_format_lowercase" name="video_title_format">
+    </div>
+    <div class="option-3">
+        <p>Capitalise Every Word</p>
+        <label for="video_title_format_capitalize"></label>
+        <input type="radio" value="capitalize" id="video_title_format_capitalize" name="video_title_format">
+    </div>
+    <div class="option-3">
+        <p>Do not modify</p>
+        <label for="video_title_format_default"></label>
+        <input type="radio" value="default" id="video_title_format_default" name="video_title_format">
+    </div>
+</div>
+</body>
+<script src="js/options_popup.js"></script>
+</html>

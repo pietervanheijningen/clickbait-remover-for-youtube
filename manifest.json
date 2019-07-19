@@ -23,7 +23,9 @@
     "default_icon": {
       "16": "images/get_started16.png",
       "32": "images/get_started32.png"
-    }
+    },
+    "default_title": "yt-anti-clickbait",
+    "default_popup": "options_popup.html"
   },
   "icons": {
     "16": "images/get_started16.png",
@@ -35,6 +37,7 @@
     "*://www.youtube.com/*",
     "*://i.ytimg.com/*",
     "webRequest",
+    "storage",
     "webRequestBlocking",
     "tabs"
   ]

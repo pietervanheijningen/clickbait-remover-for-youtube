@@ -11,6 +11,14 @@ chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
     })
 });
 
+chrome.runtime.onInstalled.addListener(function () {
+    // default values
+    chrome.storage.sync.set({
+        preferred_thumbnail_file: 'hq1',
+        video_title_format: 'lowercase'
+    })
+});
+
 chrome.webRequest.onBeforeRequest.addListener(
     function (details) {
         if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
