@@ -44,7 +44,7 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             }
         },
         {
-            urls: ['https://i.ytimg.com/vi/*/hqdefault.jpg?*'],
+            urls: ['https://i.ytimg.com/vi/*/hqdefault.jpg*'],
             types: ['image']
         },
         ['blocking']
@@ -57,7 +57,7 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             }
         },
         {
-            urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg?*`],
+            urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`],
             types: ['image']
         },
         ['blocking']
