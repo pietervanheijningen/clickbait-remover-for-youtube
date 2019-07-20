@@ -5,9 +5,6 @@ let error404Listener = null;
 
 chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
     tabs.forEach(function (tab) {
-        chrome.tabs.insertCSS(tab.id, {
-            file: 'css/youtube.css'
-        });
         chrome.tabs.executeScript(tab.id, {
             file: 'js/replaceThumbnails.js'
         })
@@ -34,6 +31,12 @@ chrome.storage.onChanged.addListener(function (changes) {
             setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
         }
     }
+
+    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
+        tabs.forEach(function (tab) {
+            chrome.tabs.sendMessage(tab.id, changes);
+        })
+    });
 });
 
 function setupThumbnailRedirectListeners(preferredThumbnailFile) {
