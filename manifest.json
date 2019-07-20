@@ -8,8 +8,8 @@
       "matches": [
         "*://www.youtube.com/*"
       ],
-      "css": [
-        "css/youtube.css"
+      "js": [
+        "js/youtube.js"
       ]
     }
   ],
