@@ -9,14 +9,8 @@ chrome.storage.sync.get(optionKeys, function (storage) {
             }
 
             item.addEventListener('input', function () {
-                handleOptionSelection(optionKey, item.value)
+                chrome.storage.sync.set({[optionKey]: item.value});
             })
         });
     })
 });
-
-function handleOptionSelection(optionKey, value) {
-    chrome.storage.sync.set({[optionKey]: value}, function () {
-        // query all youtube tabs and apply the changes
-    });
-}
