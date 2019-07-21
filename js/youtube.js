@@ -1,6 +1,5 @@
 let styleElement = null;
 let hasThumbnailBeenReplacedBefore = false;
-let hasBeenHqdefaultBefore = true;
 
 // <executed_on_content_script_loaded>
 chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) {
@@ -22,7 +21,6 @@ chrome.runtime.onMessage.addListener(function (message) {
                     imgToSearch = message[change].oldValue
                 } else {
                     imgToSearch = 'hqdefault';
-                    hasBeenHqdefaultBefore = true;
                 }
 
                 for (let i = 0; i < imgElements.length; i++) {
@@ -30,16 +28,12 @@ chrome.runtime.onMessage.addListener(function (message) {
 
                         let url = imgElements[i].src.replace(`${imgToSearch}.jpg`, `${message[change].newValue}.jpg`);
 
-                        if (hasBeenHqdefaultBefore) {
+                        if (!hasThumbnailBeenReplacedBefore && message[change].newValue === 'hqdefault' && !url.match('.*stringtokillcache')) {
                             url += '&stringtokillcache'
                         }
 
                         imgElements[i].src = url;
                     }
-                }
-
-                if (message[change].newValue === 'hqdefault') {
-                    hasBeenHqdefaultBefore = true;
                 }
 
                 hasThumbnailBeenReplacedBefore = true;
