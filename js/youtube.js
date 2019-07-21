@@ -2,11 +2,14 @@ let styleElement = null;
 let hasThumbnailBeenReplacedBefore = false;
 let hasBeenHqdefaultBefore = true;
 
+// <executed_on_content_script_loaded>
 chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) {
+    // only running something for the css change, as the webRequest listeners should be live now.
     if (video_title_format !== 'default') {
         updateCSS(video_title_format);
     }
 });
+// </executed_on_content_script_loaded>
 
 chrome.runtime.onMessage.addListener(function (message) {
     Object.keys(message).forEach(function (change) {

@@ -3,7 +3,7 @@ let redirectListener = null;
 let error404Listener = null;
 
 // <executed_on_extension_enabled>
-chrome.storage.sync.get(['preferred_thumbnail_file', 'video_title_format'], function (storage) {
+chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 
     setupThumbnailRedirectListeners(storage.preferred_thumbnail_file);
 
@@ -13,9 +13,6 @@ chrome.storage.sync.get(['preferred_thumbnail_file', 'video_title_format'], func
                 chrome.tabs.sendMessage(tab.id, {
                     'preferred_thumbnail_file': {
                         newValue: storage.preferred_thumbnail_file
-                    },
-                    'video_title_format': {
-                        newValue: storage.video_title_format
                     }
                 });
             });
@@ -35,10 +32,7 @@ chrome.runtime.onInstalled.addListener(function () {
 chrome.storage.onChanged.addListener(function (changes) {
     if (changes.preferred_thumbnail_file !== undefined) {
         removeThumbnailRedirectListeners();
-
-        if (changes.preferred_thumbnail_file.newValue !== 'default') {
-            setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
-        }
+        setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
     }
 
     chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
@@ -49,31 +43,33 @@ chrome.storage.onChanged.addListener(function (changes) {
 });
 
 function setupThumbnailRedirectListeners(preferredThumbnailFile) {
-    chrome.webRequest.onBeforeRequest.addListener(
-        redirectListener = function (details) {
-            if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
-                return {redirectUrl: details.url.replace('hqdefault.jpg', `${preferredThumbnailFile}.jpg`)};
-            }
-        },
-        {
-            urls: ['https://i.ytimg.com/vi/*/hqdefault.jpg*'],
-            types: ['image']
-        },
-        ['blocking']
-    );
+    if (preferredThumbnailFile !== 'hqdefault') {
+        chrome.webRequest.onBeforeRequest.addListener(
+            redirectListener = function (details) {
+                if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
+                    return {redirectUrl: details.url.replace('hqdefault.jpg', `${preferredThumbnailFile}.jpg`)};
+                }
+            },
+            {
+                urls: ['https://i.ytimg.com/vi/*/hqdefault.jpg*'],
+                types: ['image']
+            },
+            ['blocking']
+        );
 
-    chrome.webRequest.onHeadersReceived.addListener(
-        error404Listener = function (details) {
-            if (details.statusCode === 404) {
-                return {redirectUrl: details.url.replace(`${preferredThumbnailFile}.jpg`, 'hqdefault.jpg') + `&noRedirectToken=${noRedirectToken}`};
-            }
-        },
-        {
-            urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`],
-            types: ['image']
-        },
-        ['blocking']
-    );
+        chrome.webRequest.onHeadersReceived.addListener(
+            error404Listener = function (details) {
+                if (details.statusCode === 404) {
+                    return {redirectUrl: details.url.replace(`${preferredThumbnailFile}.jpg`, 'hqdefault.jpg') + `&noRedirectToken=${noRedirectToken}`};
+                }
+            },
+            {
+                urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`],
+                types: ['image']
+            },
+            ['blocking']
+        );
+    }
 }
 
 function removeThumbnailRedirectListeners() {
