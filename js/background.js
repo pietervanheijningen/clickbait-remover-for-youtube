@@ -2,18 +2,27 @@ let noRedirectToken = 'zctf420otaqimwn9lx8m';
 let redirectListener = null;
 let error404Listener = null;
 
+// <executed_on_extension_enabled>
+chrome.storage.sync.get(['preferred_thumbnail_file', 'video_title_format'], function (storage) {
 
-chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
-    tabs.forEach(function (tab) {
-        chrome.tabs.executeScript(tab.id, {
-            file: 'js/replaceThumbnails.js'
+    setupThumbnailRedirectListeners(storage.preferred_thumbnail_file);
+
+    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
+        tabs.forEach(function (tab) {
+            chrome.tabs.executeScript(tab.id, {file: 'js/youtube.js'}, function () {
+                chrome.tabs.sendMessage(tab.id, {
+                    'preferred_thumbnail_file': {
+                        newValue: storage.preferred_thumbnail_file
+                    },
+                    'video_title_format': {
+                        newValue: storage.video_title_format
+                    }
+                });
+            });
         })
-    })
+    });
 });
-
-chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
-    setupThumbnailRedirectListeners(storage.preferred_thumbnail_file)
-});
+// </executed_on_extension_enabled>
 
 chrome.runtime.onInstalled.addListener(function () {
     // default values
