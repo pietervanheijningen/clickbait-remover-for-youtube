@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "yt-anti-clickbait",
+  "name": "Clickbait Remover for Youtube",
   "version": "0.1",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "description": "Replaces thumbnails and modifies titles of videos on youtube.com",
   "content_scripts": [
     {
       "matches": [
@@ -24,7 +24,7 @@
       "16": "images/get_started16.png",
       "32": "images/get_started32.png"
     },
-    "default_title": "yt-anti-clickbait",
+    "default_title": "Clickbait Remover for Youtube",
     "default_popup": "options_popup.html"
   },
   "icons": {
