@@ -21,17 +21,17 @@
   },
   "browser_action": {
     "default_icon": {
-      "16": "images/get_started16.png",
-      "32": "images/get_started32.png"
+      "16": "images/clickbait_remover_icon16.png",
+      "32": "images/clickbait_remover_icon32.png"
     },
     "default_title": "Clickbait Remover for Youtube",
     "default_popup": "options_popup.html"
   },
   "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
+    "16": "images/clickbait_remover_icon16.png",
+    "32": "images/clickbait_remover_icon32.png",
+    "48": "images/clickbait_remover_icon48.png",
+    "128": "images/clickbait_remover_icon128.png"
   },
   "permissions": [
     "*://www.youtube.com/*",
