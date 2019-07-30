@@ -16,17 +16,24 @@ chrome.runtime.onMessage.addListener(function (message) {
             case 'preferred_thumbnail_file':
                 let imgElements = document.getElementsByTagName('img');
                 let imgToSearch = null;
+                let imgToReplace = null;
 
                 if (hasThumbnailBeenReplacedBefore) {
                     imgToSearch = message[change].oldValue
                 } else {
-                    imgToSearch = 'hqdefault';
+                    imgToSearch = 'hqdefault'
+                }
+
+                if (message[change].newValue === undefined) {
+                    imgToReplace = 'hq1'
+                } else {
+                    imgToReplace = message[change].newValue
                 }
 
                 for (let i = 0; i < imgElements.length; i++) {
                     if (imgElements[i].src.match(`https://i.ytimg.com/vi/.*/${imgToSearch}.jpg?.*`)) {
 
-                        let url = imgElements[i].src.replace(`${imgToSearch}.jpg`, `${message[change].newValue}.jpg`);
+                        let url = imgElements[i].src.replace(`${imgToSearch}.jpg`, `${imgToReplace}.jpg`);
 
                         if (!hasThumbnailBeenReplacedBefore && message[change].newValue === 'hqdefault' && !url.match('.*stringtokillcache')) {
                             url += '&stringtokillcache'
