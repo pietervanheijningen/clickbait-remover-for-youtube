@@ -17,6 +17,7 @@ chrome.runtime.onMessage.addListener(function (message) {
                 let imgElements = document.getElementsByTagName('img');
                 let imgToSearch = null;
                 let imgToReplace = null;
+                let appendStringToKillCache = false;
 
                 if (hasThumbnailBeenReplacedBefore) {
                     imgToSearch = message[change].oldValue
@@ -29,13 +30,16 @@ chrome.runtime.onMessage.addListener(function (message) {
                 } else {
                     imgToReplace = message[change].newValue
                 }
+                if (hasThumbnailBeenReplacedBefore && message[change].newValue === 'hqdefault') {
+                    appendStringToKillCache = true;
+                }
 
                 for (let i = 0; i < imgElements.length; i++) {
                     if (imgElements[i].src.match(`https://i.ytimg.com/vi/.*/${imgToSearch}.jpg?.*`)) {
 
                         let url = imgElements[i].src.replace(`${imgToSearch}.jpg`, `${imgToReplace}.jpg`);
 
-                        if (!hasThumbnailBeenReplacedBefore && message[change].newValue === 'hqdefault' && !url.match('.*stringtokillcache')) {
+                        if (appendStringToKillCache && !url.match('.*stringtokillcache')) {
                             url += '&stringtokillcache'
                         }
 
