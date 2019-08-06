@@ -15,7 +15,6 @@ chrome.runtime.onMessage.addListener(function (message) {
         switch (change) {
             case 'preferred_thumbnail_file':
                 updateThumbnails(
-                    message[change].oldValue,
                     message[change].newValue === undefined ? 'hq1' : message[change].newValue
                 );
                 break;
@@ -53,25 +52,19 @@ function updateCSS(option) {
     }
 }
 
-function updateThumbnails(oldImage, newImage) {
+function updateThumbnails(newImage) {
     let imgElements = document.getElementsByTagName('img');
 
-    if (firstTimeReplacing) {
-        oldImage = 'hqdefault'
-    }
-
     for (let i = 0; i < imgElements.length; i++) {
-        if (imgElements[i].src.match(`https://i.ytimg.com/vi/.*/${oldImage}.jpg?.*`)) {
+        if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault).jpg?.*')) {
 
-            let url = imgElements[i].src.replace(`${oldImage}.jpg`, `${newImage}.jpg`);
+            let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault).jpg/, `${newImage}.jpg`);
 
-            if (firstTimeReplacing) {
+            if (!url.match('.*stringtokillcache')) {
                 url += '&stringtokillcache'
             }
 
             imgElements[i].src = url;
         }
     }
-
-    firstTimeReplacing = false;
 }

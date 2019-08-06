@@ -1,8 +1,11 @@
+## v0.1.5
+- Fixed dynamically loaded thumbnails sometimes not working with the live switcher
+
 ## v0.1.4
 - Added firefox version
 - Simplified live thumbnail updater (and fixed bugs)
 - Made capitalise first letter the default video title format
-- Fixed capitalise first letter not working in for endscreen videos
+- Fixed capitalise first letter not working for endscreen videos
 
 ## v0.1.3
 - Switched tabs permission to activeTab
