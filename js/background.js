@@ -75,6 +75,10 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
 }
 
 function removeThumbnailRedirectListeners() {
-    chrome.webRequest.onBeforeRequest.removeListener(redirectListener);
-    chrome.webRequest.onHeadersReceived.removeListener(error404Listener);
+    if (redirectListener !== null) {
+        chrome.webRequest.onBeforeRequest.removeListener(redirectListener);
+    }
+    if (error404Listener !== null) {
+        chrome.webRequest.onHeadersReceived.removeListener(error404Listener);
+    }
 }

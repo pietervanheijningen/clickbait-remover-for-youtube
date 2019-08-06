@@ -1,3 +1,6 @@
+## v0.1.7
+- Fixed thumbnail replacer sometimes not working in firefox
+
 ## v0.1.6
 - Fixed default settings being reapplied when extension is updated
 
@@ -26,3 +29,4 @@
 
 - First version
 - Added basic functionality
+g
