@@ -40,7 +40,7 @@ function updateCSS(option) {
             styleElement.innerHTML = '#video-title,.ytp-videowall-still-info-title{text-transform:lowercase;}';
             break;
         case 'capitalize_first_letter':
-            styleElement.innerHTML = '#video-title{text-transform:lowercase;display:block!important;}#video-title::first-letter{text-transform:uppercase;}';
+            styleElement.innerHTML = '#video-title,.ytp-videowall-still-info-title{text-transform:lowercase;display:block!important;}#video-title::first-letter,.ytp-videowall-still-info-title::first-letter{text-transform:uppercase;}';
             break;
         case 'default':
             styleElement.remove();
