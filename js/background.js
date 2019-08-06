@@ -25,7 +25,7 @@ chrome.runtime.onInstalled.addListener(function () {
     // default values
     chrome.storage.sync.set({
         preferred_thumbnail_file: 'hq1',
-        video_title_format: 'lowercase'
+        video_title_format: 'capitalize_first_letter'
     })
 });
 
