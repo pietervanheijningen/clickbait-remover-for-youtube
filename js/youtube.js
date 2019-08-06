@@ -1,5 +1,5 @@
 let styleElement = null;
-let hasThumbnailBeenReplacedBefore = false;
+let firstTimeReplacing = true;
 
 // <executed_on_content_script_loaded>
 chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) {
@@ -14,40 +14,10 @@ chrome.runtime.onMessage.addListener(function (message) {
     Object.keys(message).forEach(function (change) {
         switch (change) {
             case 'preferred_thumbnail_file':
-                let imgElements = document.getElementsByTagName('img');
-                let imgToSearch = null;
-                let imgToReplace = null;
-                let appendStringToKillCache = false;
-
-                if (hasThumbnailBeenReplacedBefore) {
-                    imgToSearch = message[change].oldValue
-                } else {
-                    imgToSearch = 'hqdefault'
-                }
-
-                if (message[change].newValue === undefined) {
-                    imgToReplace = 'hq1'
-                } else {
-                    imgToReplace = message[change].newValue
-                }
-                if (hasThumbnailBeenReplacedBefore && message[change].newValue === 'hqdefault') {
-                    appendStringToKillCache = true;
-                }
-
-                for (let i = 0; i < imgElements.length; i++) {
-                    if (imgElements[i].src.match(`https://i.ytimg.com/vi/.*/${imgToSearch}.jpg?.*`)) {
-
-                        let url = imgElements[i].src.replace(`${imgToSearch}.jpg`, `${imgToReplace}.jpg`);
-
-                        if (appendStringToKillCache && !url.match('.*stringtokillcache')) {
-                            url += '&stringtokillcache'
-                        }
-
-                        imgElements[i].src = url;
-                    }
-                }
-
-                hasThumbnailBeenReplacedBefore = true;
+                updateThumbnails(
+                    message[change].oldValue,
+                    message[change].newValue === undefined ? 'hq1' : message[change].newValue
+                );
                 break;
             case 'video_title_format':
                 updateCSS(message[change].newValue);
@@ -81,4 +51,27 @@ function updateCSS(option) {
     if (appendingElement) {
         document.head.appendChild(styleElement);
     }
+}
+
+function updateThumbnails(oldImage, newImage) {
+    let imgElements = document.getElementsByTagName('img');
+
+    if (firstTimeReplacing) {
+        oldImage = 'hqdefault'
+    }
+
+    for (let i = 0; i < imgElements.length; i++) {
+        if (imgElements[i].src.match(`https://i.ytimg.com/vi/.*/${oldImage}.jpg?.*`)) {
+
+            let url = imgElements[i].src.replace(`${oldImage}.jpg`, `${newImage}.jpg`);
+
+            if (firstTimeReplacing) {
+                url += '&stringtokillcache'
+            }
+
+            imgElements[i].src = url;
+        }
+    }
+
+    firstTimeReplacing = false;
 }
