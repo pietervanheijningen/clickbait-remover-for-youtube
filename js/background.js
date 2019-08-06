@@ -21,12 +21,14 @@ chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 });
 // </executed_on_extension_enabled>
 
-chrome.runtime.onInstalled.addListener(function () {
-    // default values
-    chrome.storage.sync.set({
-        preferred_thumbnail_file: 'hq1',
-        video_title_format: 'capitalize_first_letter'
-    })
+chrome.runtime.onInstalled.addListener(function ({reason}) {
+    if (reason === 'install') {
+        // default values
+        chrome.storage.sync.set({
+            preferred_thumbnail_file: 'hq1',
+            video_title_format: 'capitalize_first_letter'
+        })
+    }
 });
 
 chrome.storage.onChanged.addListener(function (changes) {

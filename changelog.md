@@ -1,3 +1,6 @@
+## v0.1.6
+- Fixed default settings being reapplied when extension is updated
+
 ## v0.1.5
 - Fixed dynamically loaded thumbnails sometimes not working with the live switcher
 
