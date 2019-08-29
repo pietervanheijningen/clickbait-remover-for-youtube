@@ -16,6 +16,7 @@
 
         .container {
             margin: 0 8px;
+            padding-top: 20px;
         }
 
         .optionsContainer {
@@ -50,8 +51,36 @@
             width: 100%;
             text-align: center;
             background-color: #686868;
-            color: white;
+            color: #cbcbcb;
             padding: 2px 0;
+            border-bottom: 1px solid #292929;
+        }
+
+        .tabsContainer {
+            width: 100%;
+        }
+
+        .tab {
+            width: 50%;
+            text-align: center;
+            color: #cbcbcb;
+            padding: 2px 0;
+            float: left;
+            background-color: #686868;
+        }
+
+        .tab:hover {
+            background-color: #404040;
+            cursor: pointer;
+        }
+
+        .activeTab {
+            background-color: #404040 !important;
+            color: white !important;
+        }
+
+        .hidden {
+            display: none;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -60,7 +89,7 @@
                 color: #bfbfbf;
             }
 
-            #banner {
+            #banner, .tab {
                 background-color: #4e4e4e;
                 color: #b7b7b7;
             }
@@ -69,7 +98,13 @@
 </head>
 <body>
 <div id="banner">Clickbait Remover for Youtube</div>
-<div class="container">
+
+<div class="tabsContainer">
+    <div id="videoSettingsTab" class="tab activeTab">Video settings</div>
+    <div id="pageSelectorTab" class="tab">Page selector</div>
+</div>
+
+<div class="container" id="videoSettings">
     <h3>Where to grab the thumbnail image:</h3>
     <div class="optionsContainer">
         <div class="option-4">
@@ -113,6 +148,10 @@
             <input type="radio" value="default" id="video_title_format_default" name="video_title_format">
         </div>
     </div>
+</div>
+
+<div id="pageSelector" class="hidden">
+    <p>test</p>
 </div>
 </body>
 <script src="js/options_popup.js"></script>

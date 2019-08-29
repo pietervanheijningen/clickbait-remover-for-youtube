@@ -14,3 +14,19 @@ chrome.storage.sync.get(optionKeys, function (storage) {
         });
     })
 });
+
+document.getElementById('pageSelectorTab').onclick = function () {
+    this.classList.add('activeTab');
+    document.getElementById('videoSettingsTab').classList.remove('activeTab');
+
+    document.getElementById('videoSettings').classList.add('hidden');
+    document.getElementById('pageSelector').classList.remove('hidden');
+};
+
+document.getElementById('videoSettingsTab').onclick = function () {
+    this.classList.add('activeTab');
+    document.getElementById('pageSelectorTab').classList.remove('activeTab');
+
+    document.getElementById('pageSelector').classList.add('hidden');
+    document.getElementById('videoSettings').classList.remove('hidden');
+};
