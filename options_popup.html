@@ -36,11 +36,11 @@
         }
 
         .option-4 {
-            width: 25%;
+            width: calc(100% / 4);
         }
 
         .option-3 {
-            width: 33.33%;
+            width: calc(100% / 3);
         }
 
         input[type='radio'] {
@@ -81,6 +81,42 @@
 
         .hidden {
             display: none;
+        }
+
+        .pageSelectorContainer {
+            width: 420px;
+            height: 420px;
+        }
+
+        .pageSelectorTile {
+            box-sizing: border-box;
+            width: calc(100% / 4);
+            height: calc(100% / 4);
+            margin-right: calc(100% / 24);
+            margin-left: calc(100% / 24);
+            margin-bottom: calc(100% / 12);
+            background-color: #f1f3f4;
+            float: left;
+            cursor: pointer;
+        }
+
+        .pageSelectorTile input:hover {
+            cursor: pointer;
+        }
+
+        .pageSelectorTile p {
+            text-align: center;
+        }
+
+        .activeTile {
+            border: 2px solid black;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -150,8 +186,49 @@
     </div>
 </div>
 
-<div id="pageSelector" class="hidden">
-    <p>test</p>
+<div class="container hidden" id="pageSelector">
+    <h3>Where should the extension be active:</h3>
+
+    <div class="center">
+        <div class="pageSelectorContainer">
+            <div class="pageSelectorTile center" id="homepage">
+                <p>Homepage</p>
+                <input type="checkbox" id="checkbox_homepage">
+            </div>
+            <div class="pageSelectorTile center" id="trending">
+                <p>Trending</p>
+                <input type="checkbox" id="checkbox_trending">
+            </div>
+            <div class="pageSelectorTile center" id="subscriptions">
+                <p>Subscriptions</p>
+                <input type="checkbox" id="checkbox_subscriptions">
+            </div>
+            <div class="pageSelectorTile center" id="library">
+                <p>Library</p>
+                <input type="checkbox" id="checkbox_library">
+            </div>
+            <div class="pageSelectorTile center" id="history">
+                <p>History</p>
+                <input type="checkbox" id="checkbox_history">
+            </div>
+            <div class="pageSelectorTile center" id="channel_pages">
+                <p>Channel pages</p>
+                <input type="checkbox" id="checkbox_channel_pages">
+            </div>
+            <div class="pageSelectorTile center" id="playlists">
+                <p>Playlists</p>
+                <input type="checkbox" id="checkbox_playlists">
+            </div>
+            <div class="pageSelectorTile center" id="search_results">
+                <p>Search results</p>
+                <input type="checkbox" id="checkbox_search_results">
+            </div>
+            <div class="pageSelectorTile center" id="sidebar">
+                <p>Sidebar next to videos</p>
+                <input type="checkbox" id="checkbox_sidebar">
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="js/options_popup.js"></script>
