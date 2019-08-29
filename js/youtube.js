@@ -1,5 +1,4 @@
 let styleElement = null;
-let firstTimeReplacing = true;
 
 // <executed_on_content_script_loaded>
 chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) {
@@ -8,6 +7,8 @@ chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) 
         updateCSS(video_title_format);
     }
 });
+
+chrome.runtime.sendMessage({'url': window.location.href});
 // </executed_on_content_script_loaded>
 
 chrome.runtime.onMessage.addListener(function (message) {
