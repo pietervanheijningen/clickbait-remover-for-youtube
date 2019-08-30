@@ -62,10 +62,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     sendResponse(isYoutubePageEnabledFromTabId(sender.tab.id));
 });
 
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (changeInfo.title !== undefined) {
-        if (youtubeTabIdsByPageId[tabId] !== undefined && tab.url !== undefined) {
-            youtubeTabIdsByPageId[tabId] = youtubeUrlToPageId(tab.url);
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
+    if (youtubeTabIdsByPageId[tabId] !== undefined) {
+        if (changeInfo.status === 'loading') {
+            if (changeInfo.url !== undefined) {
+                youtubeTabIdsByPageId[tabId] = youtubeUrlToPageId(changeInfo.url);
+            }
+        }
+
+        if (changeInfo.title !== undefined) {
             chrome.storage.sync.get(['video_title_format'], function (storage) {
                 chrome.tabs.sendMessage(tabId, {
                     'video_title_format': {
