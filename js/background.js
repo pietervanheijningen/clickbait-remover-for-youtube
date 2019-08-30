@@ -59,7 +59,7 @@ chrome.runtime.onInstalled.addListener(function ({reason}) {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     youtubeTabIdsByPageId[sender.tab.id] = youtubeUrlToPageId(request.url);
-    sendResponse();
+    sendResponse(isYoutubePageEnabledFromTabId(sender.tab.id));
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {

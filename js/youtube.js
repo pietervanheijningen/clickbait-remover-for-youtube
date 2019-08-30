@@ -3,12 +3,12 @@ let styleElement = null;
 // <executed_on_content_script_loaded>
 chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) {
     // only running something for the css change, as the webRequest listeners should be live now.
-    if (video_title_format !== 'default') {
-        updateCSS(video_title_format);
-    }
+    chrome.runtime.sendMessage({'url': window.location.href}, function (isPageEnabled) {
+        if (isPageEnabled && video_title_format !== 'default') {
+            updateCSS(video_title_format);
+        }
+    });
 });
-
-chrome.runtime.sendMessage({'url': window.location.href});
 // </executed_on_content_script_loaded>
 
 chrome.runtime.onMessage.addListener(function (message) {
