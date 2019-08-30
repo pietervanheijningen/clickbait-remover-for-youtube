@@ -22,6 +22,7 @@ chrome.runtime.onMessage.addListener(function (message) {
             case 'video_title_format':
                 updateCSS(message[change].newValue);
                 break;
+
         }
     })
 });

@@ -1,9 +1,11 @@
 let noRedirectToken = 'zctf420otaqimwn9lx8m';
 let redirectListener = null;
 let error404Listener = null;
+let youtubeTabIdsByPageId = {};
+let enabledPages = {};
 
 // <executed_on_extension_enabled>
-chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
+chrome.storage.sync.get(['preferred_thumbnail_file', 'enabled_pages'], function (storage) {
 
     setupThumbnailRedirectListeners(storage.preferred_thumbnail_file);
 
@@ -18,6 +20,8 @@ chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
             });
         })
     });
+
+    enabledPages = storage.enabled_pages;
 });
 // </executed_on_extension_enabled>
 
@@ -53,7 +57,24 @@ chrome.runtime.onInstalled.addListener(function ({reason}) {
     }
 });
 
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    youtubeTabIdsByPageId[sender.tab.id] = youtubeUrlToPageId(request.url);
+    sendResponse();
+});
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
+    if (changeInfo.status === 'loading') {
+        if (youtubeTabIdsByPageId[tabId] !== undefined && changeInfo.url !== undefined) {
+            youtubeTabIdsByPageId[tabId] = youtubeUrlToPageId(changeInfo.url);
+        }
+    }
+});
+
 chrome.storage.onChanged.addListener(function (changes) {
+    if (changes.enabled_pages !== undefined) {
+        enabledPages = changes.enabled_pages.newValue
+    }
+
     if (changes.preferred_thumbnail_file !== undefined) {
         removeThumbnailRedirectListeners();
         setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
@@ -61,7 +82,31 @@ chrome.storage.onChanged.addListener(function (changes) {
 
     chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
         tabs.forEach(function (tab) {
-            chrome.tabs.sendMessage(tab.id, changes);
+            if (isYoutubePageEnabledFromTabId(tab.id)) {
+                if (changes.enabled_pages !== undefined) {
+                    chrome.storage.sync.get(['preferred_thumbnail_file', 'video_title_format'], function (storage) {
+                        chrome.tabs.sendMessage(tab.id, {
+                            'preferred_thumbnail_file': {
+                                newValue: storage.preferred_thumbnail_file
+                            },
+                            'video_title_format': {
+                                newValue: storage.video_title_format
+                            }
+                        });
+                    })
+                } else {
+                    chrome.tabs.sendMessage(tab.id, changes);
+                }
+            } else {
+                chrome.tabs.sendMessage(tab.id, {
+                    'preferred_thumbnail_file': {
+                        newValue: 'hqdefault'
+                    },
+                    'video_title_format': {
+                        newValue: 'default'
+                    }
+                });
+            }
         })
     });
 });
@@ -71,7 +116,11 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
         chrome.webRequest.onBeforeRequest.addListener(
             redirectListener = function (details) {
                 if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
-                    return {redirectUrl: details.url.replace('hqdefault.jpg', `${preferredThumbnailFile}.jpg`)};
+                    if (isYoutubePageEnabledFromTabId(details.tabId)) {
+                        return {redirectUrl: details.url.replace('hqdefault.jpg', `${preferredThumbnailFile}.jpg`)};
+                    } else {
+                        return {} // todo: not sure if this is right, just want the request to continue on like nothing happened
+                    }
                 }
             },
             {
@@ -102,5 +151,43 @@ function removeThumbnailRedirectListeners() {
     }
     if (error404Listener !== null) {
         chrome.webRequest.onHeadersReceived.removeListener(error404Listener);
+    }
+}
+
+function isYoutubePageEnabledFromTabId(tabId) {
+    if (youtubeTabIdsByPageId[tabId] !== undefined) {
+        if (enabledPages[youtubeTabIdsByPageId[tabId]] !== undefined) {
+            if (enabledPages[youtubeTabIdsByPageId[tabId]] === 'unknown') {
+                return true;
+            }
+            return enabledPages[youtubeTabIdsByPageId[tabId]]
+        }
+    }
+
+    return false
+}
+
+function youtubeUrlToPageId(url) {
+    let path = (new URL(url)).pathname.replace(/\/+$/, '');
+    if (path === '') {
+        return 'homepage'
+    } else if (path === '/feed/trending') {
+        return 'trending'
+    } else if (path === '/feed/subscriptions') {
+        return 'subscriptions'
+    } else if (path === '/feed/library') {
+        return 'library'
+    } else if (path === '/feed/history') {
+        return 'history'
+    } else if (path === '/watch') {
+        return 'sidebar'
+    } else if (path === '/playlist') {
+        return 'playlist'
+    } else if (path === '/results') {
+        return 'search_results'
+    } else if (path.match('\/(user|channel)\/.*')) {
+        return 'channel_pages'
+    } else {
+        return 'unknown';
     }
 }
