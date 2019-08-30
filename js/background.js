@@ -22,11 +22,33 @@ chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 // </executed_on_extension_enabled>
 
 chrome.runtime.onInstalled.addListener(function ({reason}) {
+    let defaultValues = {
+        preferred_thumbnail_file: 'hq1',
+        video_title_format: 'capitalize_first_letter',
+        enabled_pages: {
+            homepage: true,
+            trending: true,
+            subscriptions: true,
+            library: true,
+            history: true,
+            channel_pages: true,
+            playlists: true,
+            search_results: true,
+            sidebar: true
+        }
+    };
+
     if (reason === 'install') {
-        // default values
-        chrome.storage.sync.set({
-            preferred_thumbnail_file: 'hq1',
-            video_title_format: 'capitalize_first_letter'
+        chrome.storage.sync.set(defaultValues)
+    } else if (reason === 'update') {
+        chrome.storage.sync.get(Object.keys(defaultValues), function (storage) {
+            for (let defaultValuesKey in defaultValues) {
+                if (storage[defaultValuesKey] === undefined) {
+                    chrome.storage.sync.set({
+                        [defaultValuesKey]: defaultValues[defaultValuesKey]
+                    })
+                }
+            }
         })
     }
 });
