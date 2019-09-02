@@ -71,10 +71,14 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo) {
         }
 
         if (changeInfo.title !== undefined) {
-            chrome.storage.sync.get(['video_title_format'], function (storage) {
+            chrome.storage.sync.get(['video_title_format', 'preferred_thumbnail_file'], function (storage) {
+                let isYoutubePageEnabled = isYoutubePageEnabledFromTabId(tabId);
                 chrome.tabs.sendMessage(tabId, {
                     'video_title_format': {
-                        newValue: isYoutubePageEnabledFromTabId(tabId) ? storage.video_title_format : 'default'
+                        newValue: isYoutubePageEnabled ? storage.video_title_format : 'default'
+                    },
+                    'preferred_thumbnail_file': {
+                        newValue: isYoutubePageEnabled ? storage.preferred_thumbnail_file : 'hqdefault'
                     }
                 })
             })
