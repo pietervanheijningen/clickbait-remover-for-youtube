@@ -67,4 +67,21 @@ function updateThumbnails(newImage) {
             imgElements[i].src = url;
         }
     }
+
+    let backgroundImgElements = document.getElementsByClassName('ytp-videowall-still-image');
+
+    for (let i = 0; i < backgroundImgElements.length; i++) {
+        let styleAttribute = backgroundImgElements[i].getAttribute('style');
+
+        if (styleAttribute.match('.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault).jpg?.*')) {
+
+            let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault).jpg/, `${newImage}.jpg`);
+
+            if (!newStyleAttribute.match('.*stringtokillcache.*')) {
+                newStyleAttribute += newStyleAttribute.replace('\"\)\;$', '&stringtokillcache");')
+            }
+
+            backgroundImgElements[i].style = newStyleAttribute;
+        }
+    }
 }
