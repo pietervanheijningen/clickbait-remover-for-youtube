@@ -1,5 +1,4 @@
 let styleElement = null;
-let firstTimeReplacing = true;
 
 // <executed_on_content_script_loaded>
 chrome.storage.sync.get(['video_title_format'], function ({video_title_format}) {
@@ -56,15 +55,33 @@ function updateThumbnails(newImage) {
     let imgElements = document.getElementsByTagName('img');
 
     for (let i = 0; i < imgElements.length; i++) {
-        if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault).jpg?.*')) {
+        if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault).jpg?.*')) {
 
-            let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault).jpg/, `${newImage}.jpg`);
+            let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault).jpg/, `${newImage}.jpg`);
 
             if (!url.match('.*stringtokillcache')) {
-                url += '&stringtokillcache'
+                url += '?stringtokillcache'
             }
 
             imgElements[i].src = url;
+        }
+    }
+
+    let backgroundImgElements = document.querySelectorAll('.ytp-videowall-still-image, .iv-card-image');
+
+    for (let i = 0; i < backgroundImgElements.length; i++) {
+        let styleAttribute = backgroundImgElements[i].getAttribute('style');
+
+        if (styleAttribute.match('.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault).jpg?.*')) {
+
+            let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault).jpg/, `${newImage}.jpg`);
+
+            if (!newStyleAttribute.match('.*stringtokillcache.*')) {
+                // messes up existing query parameters that might be there, but that's ok.
+                newStyleAttribute = newStyleAttribute.replace(/"\);$/, '?stringtokillcache");')
+            }
+
+            backgroundImgElements[i].style = newStyleAttribute;
         }
     }
 }
