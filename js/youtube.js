@@ -78,7 +78,7 @@ function updateThumbnails(newImage) {
             let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault).jpg/, `${newImage}.jpg`);
 
             if (!newStyleAttribute.match('.*stringtokillcache.*')) {
-                newStyleAttribute += newStyleAttribute.replace('\"\)\;$', '&stringtokillcache");')
+                newStyleAttribute = newStyleAttribute.replace(/"\);$/, '&stringtokillcache");')
             }
 
             backgroundImgElements[i].style = newStyleAttribute;
