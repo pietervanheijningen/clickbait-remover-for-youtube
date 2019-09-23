@@ -49,11 +49,14 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
         chrome.webRequest.onBeforeRequest.addListener(
             redirectListener = function (details) {
                 if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
-                    return {redirectUrl: details.url.replace('hqdefault.jpg', `${preferredThumbnailFile}.jpg`)};
+                    return {redirectUrl: details.url.replace(/(hqdefault|mqdefault).jpg/, `${preferredThumbnailFile}.jpg`)};
                 }
             },
             {
-                urls: ['https://i.ytimg.com/vi/*/hqdefault.jpg*'],
+                urls: [
+                    'https://i.ytimg.com/vi/*/hqdefault.jpg*',
+                    'https://i.ytimg.com/vi/*/mqdefault.jpg*'
+                ],
                 types: ['image']
             },
             ['blocking']
