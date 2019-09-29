@@ -1,6 +1,7 @@
 let noRedirectToken = 'zctf420otaqimwn9lx8m';
 let redirectListener = null;
 let error404Listener = null;
+let externalServerListener = null;
 
 // <executed_on_extension_enabled>
 chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
@@ -48,8 +49,9 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
     if (preferredThumbnailFile !== 'hqdefault') {
         chrome.webRequest.onBeforeRequest.addListener(
             redirectListener = function (details) {
+
                 if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
-                    return {redirectUrl: details.url.replace(/(hqdefault|mqdefault).jpg/, `${preferredThumbnailFile}.jpg`)};
+                    return {redirectUrl: `https://www.pvh.me/test.php?url=${encodeURIComponent(details.url)}&preferredThumbnailFile=${preferredThumbnailFile}`};
                 }
             },
             {
@@ -74,6 +76,21 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             },
             ['blocking']
         );
+
+        chrome.webRequest.onHeadersReceived.addListener(
+            externalServerListener = function (details) {
+                for (let i = 0; i < details.responseHeaders.length; i++) {
+                    if (details.responseHeaders[i].name === 'X-Thumbnail-Url') {
+                        return {redirectUrl: details.responseHeaders[i].value}
+                    }
+                }
+            },
+            {
+                urls: ['https://www.pvh.me/test.php?url=*'],
+                types: ['image']
+            },
+            ['blocking', 'responseHeaders']
+        );
     }
 }
 
@@ -83,5 +100,8 @@ function removeThumbnailRedirectListeners() {
     }
     if (error404Listener !== null) {
         chrome.webRequest.onHeadersReceived.removeListener(error404Listener);
+    }
+    if (error404Listener !== null) {
+        chrome.webRequest.onHeadersReceived.removeListener(externalServerListener);
     }
 }
