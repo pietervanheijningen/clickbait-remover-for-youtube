@@ -1,7 +1,13 @@
+let ytApiKey = 'AIzaSyAyFeqAt42kno9Oemp4_2G9s14DvIEBJOc';
 let noRedirectToken = 'zctf420otaqimwn9lx8m';
 let redirectListener = null;
 let error404Listener = null;
 let externalServerListener = null;
+let dontReplaceChannelIds = [
+    'UC_E4px0RST-qFwXLJWBav8Q', //business casual
+    'UCXuqSBlHAE6Xw-yeJA0Tunw', //ltt
+    'UC-lHJZR3Gqxm24_Vd_AJ5Yw', //pewdiepie
+];
 
 // <executed_on_extension_enabled>
 chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
@@ -50,8 +56,23 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
         chrome.webRequest.onBeforeRequest.addListener(
             redirectListener = function (details) {
 
-                if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
-                    return {redirectUrl: `https://www.pvh.me/test.php?url=${encodeURIComponent(details.url)}&preferredThumbnailFile=${preferredThumbnailFile}`};
+                let videoId = details.url
+                    .replace('https://i.ytimg.com/vi/', '')
+                    .replace(/\/(hqdefault|mqdefault).*/, '');
+
+                let http = new XMLHttpRequest();
+                http.open(
+                    'GET',
+                    `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${ytApiKey}`,
+                    false
+                );
+                http.send();
+                let response = JSON.parse(http.responseText);
+
+                if (!dontReplaceChannelIds.includes(response.items[0].snippet.channelId) &&
+                    !details.url.includes(`&noRedirectToken=${noRedirectToken}`)
+                ) {
+                    return {redirectUrl: details.url.replace(/(hqdefault|mqdefault).jpg/, `${preferredThumbnailFile}.jpg`)};
                 }
             },
             {
@@ -76,21 +97,6 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             },
             ['blocking']
         );
-
-        chrome.webRequest.onHeadersReceived.addListener(
-            externalServerListener = function (details) {
-                for (let i = 0; i < details.responseHeaders.length; i++) {
-                    if (details.responseHeaders[i].name === 'X-Thumbnail-Url') {
-                        return {redirectUrl: details.responseHeaders[i].value}
-                    }
-                }
-            },
-            {
-                urls: ['https://www.pvh.me/test.php?url=*'],
-                types: ['image']
-            },
-            ['blocking', 'responseHeaders']
-        );
     }
 }
 
@@ -100,8 +106,5 @@ function removeThumbnailRedirectListeners() {
     }
     if (error404Listener !== null) {
         chrome.webRequest.onHeadersReceived.removeListener(error404Listener);
-    }
-    if (error404Listener !== null) {
-        chrome.webRequest.onHeadersReceived.removeListener(externalServerListener);
     }
 }
