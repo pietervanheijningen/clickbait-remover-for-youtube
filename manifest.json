@@ -37,7 +37,6 @@
   "permissions": [
     "*://www.youtube.com/*",
     "*://i.ytimg.com/*",
-    "*://*.pvh.me/*",
     "webRequest",
     "storage",
     "webRequestBlocking",
