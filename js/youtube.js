@@ -55,9 +55,9 @@ function updateThumbnails(newImage) {
     let imgElements = document.getElementsByTagName('img');
 
     for (let i = 0; i < imgElements.length; i++) {
-        if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault).jpg?.*')) {
+        if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*')) {
 
-            let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault).jpg/, `${newImage}.jpg`);
+            let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg/, `${newImage}.jpg`);
 
             if (!url.match('.*stringtokillcache')) {
                 url += '?stringtokillcache'
@@ -72,9 +72,9 @@ function updateThumbnails(newImage) {
     for (let i = 0; i < backgroundImgElements.length; i++) {
         let styleAttribute = backgroundImgElements[i].getAttribute('style');
 
-        if (styleAttribute.match('.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault).jpg?.*')) {
+        if (styleAttribute.match('.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*')) {
 
-            let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault).jpg/, `${newImage}.jpg`);
+            let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg/, `${newImage}.jpg`);
 
             if (!newStyleAttribute.match('.*stringtokillcache.*')) {
                 // messes up existing query parameters that might be there, but that's ok.
