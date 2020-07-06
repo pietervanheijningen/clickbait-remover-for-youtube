@@ -55,7 +55,8 @@ function updateThumbnails(newImage) {
     let imgElements = document.getElementsByTagName('img');
 
     for (let i = 0; i < imgElements.length; i++) {
-        if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*')) {
+        if (imgElements[i].src.match(	'https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*',
+										'https://invidious.snopyta.org/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*')) {
 
             let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg/, `${newImage}.jpg`);
 
@@ -72,7 +73,8 @@ function updateThumbnails(newImage) {
     for (let i = 0; i < backgroundImgElements.length; i++) {
         let styleAttribute = backgroundImgElements[i].getAttribute('style');
 
-        if (styleAttribute.match('.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*')) {
+        if (styleAttribute.match(	'.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*',
+									'.*https://invidious.snopyta.org/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg?.*')) {
 
             let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720).jpg/, `${newImage}.jpg`);
 
