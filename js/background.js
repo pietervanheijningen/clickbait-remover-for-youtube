@@ -7,7 +7,7 @@ chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 
     setupThumbnailRedirectListeners(storage.preferred_thumbnail_file);
 
-    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
+    chrome.tabs.query({url: '*://invidious.snopyta.org/*'}, function (tabs) {
         tabs.forEach(function (tab) {
             chrome.tabs.executeScript(tab.id, {file: 'js/youtube.js'}, function () {
                 chrome.tabs.sendMessage(tab.id, {
@@ -37,7 +37,7 @@ chrome.storage.onChanged.addListener(function (changes) {
         setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
     }
 
-    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
+    chrome.tabs.query({url: '*://invidious.snopyta.org/*'}, function (tabs) {
         tabs.forEach(function (tab) {
             chrome.tabs.sendMessage(tab.id, changes);
         })
@@ -54,7 +54,10 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             },
             {
                 urls: [
-                    'https://i.ytimg.com/vi/*/hqdefault.jpg*',
+                    'https://invidious.snopyta.org/vi/*/hqdefault.jpg*',
+                    'https://invidious.snopyta.org/vi/*/mqdefault.jpg*',
+                    'https://invidious.snopyta.org/vi/*/hq720.jpg*',
+					'https://i.ytimg.com/vi/*/hqdefault.jpg*',
                     'https://i.ytimg.com/vi/*/mqdefault.jpg*',
                     'https://i.ytimg.com/vi/*/hq720.jpg*'
                 ],
@@ -70,7 +73,8 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
                 }
             },
             {
-                urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`],
+                urls: [`https://invidious.snopyta.org/vi/*/${preferredThumbnailFile}.jpg*`],
+				urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`],
                 types: ['image']
             },
             ['blocking']
