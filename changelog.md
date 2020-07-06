@@ -1,3 +1,6 @@
+## v0.1.91
+- Added support for invidious.snopyta.org/
+
 ## v0.1.9
 - Fixed thumbnails not being updated on the new homepage layout
 
