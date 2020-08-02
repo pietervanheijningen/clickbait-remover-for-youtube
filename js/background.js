@@ -7,7 +7,7 @@ chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 
     setupThumbnailRedirectListeners(storage.preferred_thumbnail_file);
 
-    chrome.tabs.query({url: 'https://www.youtube.com/*'}, function (tabs) {
+    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
         tabs.forEach(function (tab) {
             chrome.tabs.executeScript(tab.id, {file: 'js/youtube.js'}, function () {
                 chrome.tabs.sendMessage(tab.id, {
@@ -37,7 +37,7 @@ chrome.storage.onChanged.addListener(function (changes) {
         setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
     }
 
-    chrome.tabs.query({url: 'https://www.youtube.com/*'}, function (tabs) {
+    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
         tabs.forEach(function (tab) {
             chrome.tabs.sendMessage(tab.id, changes);
         })
@@ -50,7 +50,7 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             redirectListener = function (details) {
                 if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
                     if (details.url.startsWith('https://i.ytimg.com/vi/')) {
-                        return {redirectUrl: details.url.replace(/(hqdefault|hq720).jpg/, `${preferredThumbnailFile}.jpg`)};
+                        return {redirectUrl: details.url.replace(/(hqdefault|mqdefault|hq720).jpg/, `${preferredThumbnailFile}.jpg`)};
                     } else if (details.url.startsWith('https://i.ytimg.com/vi_webp/')) {
                         return {
                             redirectUrl: details.url.replace(/(sddefault|mqdefault).webp.*/, `${preferredThumbnailFile}.jpg`)
@@ -62,6 +62,7 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             {
                 urls: [
                     'https://i.ytimg.com/vi/*/hqdefault.jpg*',
+                    'https://i.ytimg.com/vi/*/mqdefault.jpg*',
                     'https://i.ytimg.com/vi/*/hq720.jpg*',
                     'https://i.ytimg.com/vi_webp/*/sddefault.webp*',
                     'https://i.ytimg.com/vi_webp/*/mqdefault.webp*'

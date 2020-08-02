@@ -1,3 +1,10 @@
+## v0.1.9
+- Fixed thumbnails not being updated on the new homepage layout
+
+## v0.1.8
+- Fixed live switcher not working for videowalls at the end of videos
+- Fixed playlist thumbnails not being changed in top-right info menu
+
 ## v0.1.7
 - Fixed thumbnail replacer sometimes not working in firefox
 
@@ -26,7 +33,5 @@
 - Added darkmode support in options menu
 
 ## v0.1
-
 - First version
 - Added basic functionality
-g
