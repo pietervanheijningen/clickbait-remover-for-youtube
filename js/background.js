@@ -50,10 +50,10 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             redirectListener = function (details) {
                 if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
                     if (details.url.startsWith('https://i.ytimg.com/vi/')) {
-                        return {redirectUrl: details.url.replace(/(hqdefault|mqdefault|sddefault|hq720).jpg/, `${preferredThumbnailFile}.jpg`)};
+                        return {redirectUrl: details.url.replace(/(default|hqdefault|mqdefault|sddefault|hq720).jpg/, `${preferredThumbnailFile}.jpg`)};
                     } else if (details.url.startsWith('https://i.ytimg.com/vi_webp/')) {
                         return {
-                            redirectUrl: details.url.replace(/(hqdefault|mqdefault|sddefault).webp.*/, `${preferredThumbnailFile}.jpg`)
+                            redirectUrl: details.url.replace(/(default|hqdefault|mqdefault|sddefault).webp.*/, `${preferredThumbnailFile}.jpg`)
                                 .replace('/vi_webp/', '/vi/')
                         };
                     }
@@ -61,10 +61,12 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
             },
             {
                 urls: [
+                    'https://i.ytimg.com/vi/*/default.jpg*',
                     'https://i.ytimg.com/vi/*/hqdefault.jpg*',
                     'https://i.ytimg.com/vi/*/mqdefault.jpg*',
                     'https://i.ytimg.com/vi/*/sddefault.jpg*',
                     'https://i.ytimg.com/vi/*/hq720.jpg*',
+                    'https://i.ytimg.com/vi_webp/*/default.webp*',
                     'https://i.ytimg.com/vi_webp/*/hqdefault.webp*',
                     'https://i.ytimg.com/vi_webp/*/mqdefault.webp*',
                     'https://i.ytimg.com/vi_webp/*/sddefault.webp*'
