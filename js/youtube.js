@@ -35,10 +35,34 @@ function updateCSS(option) {
 
     switch (option) {
         case 'lowercase':
-            styleElement.innerHTML = '#video-title,.ytp-videowall-still-info-title{text-transform:lowercase;}';
+            //language=CSS
+            styleElement.innerHTML = `
+                #video-title,
+                .ytp-videowall-still-info-title,
+                .large-media-item-metadata > a > h3 > span,
+                .compact-media-item-headline > span {
+                    text-transform: lowercase;
+                }
+            `;
             break;
         case 'capitalize_first_letter':
-            styleElement.innerHTML = '#video-title,.ytp-videowall-still-info-title{text-transform:lowercase;display:block!important;}#video-title::first-letter,.ytp-videowall-still-info-title::first-letter{text-transform:uppercase;}';
+            //language=CSS
+            styleElement.innerHTML = `
+                #video-title,
+                .ytp-videowall-still-info-title,
+                .large-media-item-metadata > a > h3 > span,
+                .compact-media-item-headline > span {
+                    text-transform: lowercase;
+                    display: block !important;
+                }
+
+                #video-title::first-letter,
+                .ytp-videowall-still-info-title::first-letter,
+                .large-media-item-metadata > a > h3 > span::first-letter,
+                .compact-media-item-headline > span::first-letter {
+                    text-transform: uppercase;
+                }
+            `;
             break;
         case 'default':
             styleElement.remove();

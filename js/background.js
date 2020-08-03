@@ -49,14 +49,27 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
         chrome.webRequest.onBeforeRequest.addListener(
             redirectListener = function (details) {
                 if (!details.url.includes(`&noRedirectToken=${noRedirectToken}`)) {
-                    return {redirectUrl: details.url.replace(/(hqdefault|mqdefault|hq720).jpg/, `${preferredThumbnailFile}.jpg`)};
+                    if (details.url.startsWith('https://i.ytimg.com/vi/')) {
+                        return {redirectUrl: details.url.replace(/(default|hqdefault|mqdefault|sddefault|hq720).jpg/, `${preferredThumbnailFile}.jpg`)};
+                    } else if (details.url.startsWith('https://i.ytimg.com/vi_webp/')) {
+                        return {
+                            redirectUrl: details.url.replace(/(default|hqdefault|mqdefault|sddefault).webp.*/, `${preferredThumbnailFile}.jpg`)
+                                .replace('/vi_webp/', '/vi/')
+                        };
+                    }
                 }
             },
             {
                 urls: [
+                    'https://i.ytimg.com/vi/*/default.jpg*',
                     'https://i.ytimg.com/vi/*/hqdefault.jpg*',
                     'https://i.ytimg.com/vi/*/mqdefault.jpg*',
-                    'https://i.ytimg.com/vi/*/hq720.jpg*'
+                    'https://i.ytimg.com/vi/*/sddefault.jpg*',
+                    'https://i.ytimg.com/vi/*/hq720.jpg*',
+                    'https://i.ytimg.com/vi_webp/*/default.webp*',
+                    'https://i.ytimg.com/vi_webp/*/hqdefault.webp*',
+                    'https://i.ytimg.com/vi_webp/*/mqdefault.webp*',
+                    'https://i.ytimg.com/vi_webp/*/sddefault.webp*'
                 ],
                 types: ['image']
             },
@@ -66,11 +79,18 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
         chrome.webRequest.onHeadersReceived.addListener(
             error404Listener = function (details) {
                 if (details.statusCode === 404) {
-                    return {redirectUrl: details.url.replace(`${preferredThumbnailFile}.jpg`, 'hqdefault.jpg') + `&noRedirectToken=${noRedirectToken}`};
+                    if (details.url.startsWith('https://i.ytimg.com/vi/')) {
+                        return {redirectUrl: details.url.replace(`${preferredThumbnailFile}.jpg`, 'hqdefault.jpg') + `&noRedirectToken=${noRedirectToken}`};
+                    } else if (details.url.startsWith('https://i.ytimg.com/vi_webp/')) {
+                        return {redirectUrl: details.url.replace(`${preferredThumbnailFile}.webp`, 'sddefault.webp') + `&noRedirectToken=${noRedirectToken}`};
+                    }
                 }
             },
             {
-                urls: [`https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`],
+                urls: [
+                    `https://i.ytimg.com/vi/*/${preferredThumbnailFile}.jpg*`,
+                    `https://i.ytimg.com/vi_webp/*/${preferredThumbnailFile}.webp*`
+                ],
                 types: ['image']
             },
             ['blocking']
