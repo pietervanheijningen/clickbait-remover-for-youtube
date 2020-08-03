@@ -36,9 +36,9 @@
     "128": "images/clickbait_remover_icon128.png"
   },
   "permissions": [
-    "https://www.youtube.com/*",
-    "https://m.youtube.com/*",
-    "https://i.ytimg.com/*",
+    "*://www.youtube.com/*",
+    "*://m.youtube.com/*",
+    "*://i.ytimg.com/*",
     "webRequest",
     "storage",
     "webRequestBlocking",
