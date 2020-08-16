@@ -1,9 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "Clickbait Remover for Youtube",
+  "name": "__MSG_extensionName__",
   "short_name": "Clickbait Remover",
+  "default_locale": "en",
   "version": "0.2",
-  "description": "Replaces thumbnails and modifies titles of videos on youtube.com",
+  "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
       "matches": [
