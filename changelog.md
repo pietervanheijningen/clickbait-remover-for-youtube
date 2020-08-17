@@ -1,3 +1,6 @@
+## 0.3
+- Added Russian language support
+
 ## 0.2
 - Added support for m.youtube.com
 
