@@ -1,0 +1,42 @@
+{
+  "extensionName": {
+    "message": "Clickbait Remover for Youtube",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Заменяет миниатюры и изменяет названия видео на youtube.com",
+    "description": "Description of the extension."
+  },
+  "whereToGrabTheThumbnailImage": {
+    "message": "Откуда брать изображение миниатюры:",
+    "description": ""
+  },
+  "startOfTheVideo": {
+    "message": "Начало видео",
+    "description": ""
+  },
+  "middleOfTheVideo": {
+    "message": "Середина видео",
+    "description": ""
+  },
+  "endOfTheVideo": {
+    "message": "Конец видео",
+    "description": ""
+  },
+  "doNotModify": {
+    "message": "Не заменять",
+    "description": ""
+  },
+  "howToFormatTheVideoTitles": {
+    "message": "Как форматировать названия видео:",
+    "description": ""
+  },
+  "lowercase": {
+    "message": "нижний регистр",
+    "description": ""
+  },
+  "capitaliseFirstLetter": {
+    "message": "Начинать с прописной буквы",
+    "description": ""
+  }
+}
