@@ -35,8 +35,12 @@
     "message": "нижний регистр",
     "description": ""
   },
-  "capitaliseFirstLetter": {
+  "capitaliseSentence": {
     "message": "Начинать с прописной буквы",
+    "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Capitalise Words",
     "description": ""
   }
 }

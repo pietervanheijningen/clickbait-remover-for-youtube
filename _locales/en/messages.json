@@ -35,8 +35,12 @@
     "message": "lowercase",
     "description": ""
   },
-  "capitaliseFirstLetter": {
-    "message": "Capitalise first letter",
+  "capitaliseSentence": {
+    "message": "Capitalise sentence",
+    "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Capitalise Words",
     "description": ""
   }
 }

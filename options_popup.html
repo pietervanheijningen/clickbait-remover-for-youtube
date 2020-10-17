@@ -38,10 +38,6 @@
             width: 25%;
         }
 
-        .option-3 {
-            width: 33.33%;
-        }
-
         input[type='radio'] {
             cursor: pointer;
         }
@@ -96,18 +92,24 @@
 
     <h3 data-localize="__MSG_howToFormatTheVideoTitles__">How to format the video titles:</h3>
     <div class="optionsContainer">
-        <div class="option-3">
+        <div class="option-4">
             <p data-localize="__MSG_lowercase__">lowercase</p>
             <label for="video_title_format_lowercase"></label>
             <input type="radio" value="lowercase" id="video_title_format_lowercase" name="video_title_format">
         </div>
-        <div class="option-3">
-            <p data-localize="__MSG_capitaliseFirstLetter__">Capitalise first letter</p>
+        <div class="option-4">
+            <p data-localize="__MSG_capitaliseSentence__">Capitalise sentence</p>
             <label for="video_title_format_capitalize_first_letter"></label>
             <input type="radio" value="capitalize_first_letter" id="video_title_format_capitalize_first_letter"
                    name="video_title_format">
         </div>
-        <div class="option-3">
+        <div class="option-4">
+            <p data-localize="__MSG_capitaliseWords__">Capitalise Words</p>
+            <label for="video_title_format_capitalise_words"></label>
+            <input type="radio" value="capitalise_words" id="video_title_format_capitalise_words"
+                   name="video_title_format">
+        </div>
+        <div class="option-4">
             <p data-localize="__MSG_doNotModify__">Do not modify</p>
             <label for="video_title_format_default"></label>
             <input type="radio" value="default" id="video_title_format_default" name="video_title_format">
