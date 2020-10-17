@@ -36,11 +36,11 @@
     "description": ""
   },
   "capitaliseSentence": {
-    "message": "Начинать с прописной буквы",
+    "message": "Начинать название с прописной буквы",
     "description": ""
   },
   "capitaliseWords": {
-    "message": "Capitalise Words",
+    "message": "Начинать Все Слова С Прописной Буквы",
     "description": ""
   }
 }
