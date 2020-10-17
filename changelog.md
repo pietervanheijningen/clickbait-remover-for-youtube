@@ -1,3 +1,6 @@
+## 0.4
+- Added option to capitalise each word of title (not perfect)
+
 ## 0.3
 - Added Russian language support
 
