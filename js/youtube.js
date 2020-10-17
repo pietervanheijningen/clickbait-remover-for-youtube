@@ -64,6 +64,25 @@ function updateCSS(option) {
                 }
             `;
             break;
+        case 'capitalise_words':
+            //language=CSS
+            styleElement.innerHTML = `
+                #video-title,
+                .ytp-videowall-still-info-title,
+                .large-media-item-metadata > a > h3 > span,
+                .compact-media-item-headline > span {
+                    text-transform: lowercase;
+                    display: block !important;
+                }
+
+                #video-title::first-line,
+                .ytp-videowall-still-info-title::first-line,
+                .large-media-item-metadata > a > h3 > span::first-line,
+                .compact-media-item-headline > span::first-line {
+                    text-transform: capitalize;
+                }
+            `;
+            break;
         case 'default':
             styleElement.remove();
             styleElement = null;

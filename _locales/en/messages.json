@@ -38,5 +38,9 @@
   "capitaliseSentence": {
     "message": "Capitalise sentence",
     "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Capitalise Words",
+    "description": ""
   }
 }
