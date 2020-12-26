@@ -1,0 +1,46 @@
+{
+  "extensionName": {
+    "message": "Clickbait Remover for Youtube",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Asendab pisipildid ja muudab youtube.com videote pealkirju",
+    "description": "Description of the extension."
+  },
+  "whereToGrabTheThumbnailImage": {
+    "message": "Kuskohast hankida pisipilt:",
+    "description": ""
+  },
+  "startOfTheVideo": {
+    "message": "Video algusest",
+    "description": ""
+  },
+  "middleOfTheVideo": {
+    "message": "Video keskelt",
+    "description": ""
+  },
+  "endOfTheVideo": {
+    "message": "Video lõpust",
+    "description": ""
+  },
+  "doNotModify": {
+    "message": "Ära muuda",
+    "description": ""
+  },
+  "howToFormatTheVideoTitles": {
+    "message": "Kuidas vormistada video pealkirjad:",
+    "description": ""
+  },
+  "lowercase": {
+    "message": "väiketähed",
+    "description": ""
+  },
+  "capitaliseSentence": {
+    "message": "Lause algustäht",
+    "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Suured Algustähed",
+    "description": ""
+  }
+}
