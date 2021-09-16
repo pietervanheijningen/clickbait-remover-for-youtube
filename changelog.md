@@ -1,3 +1,6 @@
+## 0.5
+- Add donate screen
+
 ## 0.4.2
 - Add estonian translation
 

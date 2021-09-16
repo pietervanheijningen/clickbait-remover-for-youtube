@@ -25,3 +25,15 @@ textElements.forEach((e) => {
     }
   }
 });
+
+let donateButton = document.getElementById('donatebutton');
+
+donateButton.onclick = function () {
+    document.getElementById('settings').remove();
+    donateButton.remove();
+    document.getElementById('donate').style.display = 'block';
+}
+
+document.getElementById('paypallink').onclick = function () {
+    chrome.tabs.create({url: 'https://paypal.me/pietervanheijningen'})
+}

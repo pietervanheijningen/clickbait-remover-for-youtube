@@ -42,5 +42,13 @@
   "capitaliseWords": {
     "message": "Capitalise Words",
     "description": ""
+  },
+  "donate": {
+    "message": "Donate!",
+    "description": ""
+  },
+  "thanksForDonating": {
+    "message": "Thanks that you are considering donating!",
+    "description": ""
   }
 }

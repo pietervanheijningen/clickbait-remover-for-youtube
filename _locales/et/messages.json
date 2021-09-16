@@ -42,5 +42,13 @@
   "capitaliseWords": {
     "message": "Suured Algustähed",
     "description": ""
+  },
+  "donate": {
+    "message": "Anneta!",
+    "description": ""
+  },
+  "thanksForDonating": {
+    "message": "Täname, et kaalute annetamist!",
+    "description": ""
   }
 }
