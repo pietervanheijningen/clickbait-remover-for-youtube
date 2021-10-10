@@ -1,45 +1,56 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Clickbait Remover for Youtube options popup</title>
     <style>
         body {
-            width: 475px;
+            width: 450px;
             margin: 0;
             font-family: system-ui, sans-serif;
             font-size: 75%;
         }
 
         .container {
-            margin: 0 8px;
+            margin: 0 1%;
+        }
+
+        .title {
+            text-align: left;
         }
 
         .optionsContainer {
             width: 100%;
-            height: 100px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            align-content: center;
+            align-items: baseline;
         }
 
-        .optionsContainer div[class^='option-'] {
+        .optionsContainer div[class^="option-"] {
             float: left;
             display: flex;
             align-items: center;
             flex-direction: column;
         }
 
-        div[class^='option-'] > p {
+        div[class^="option-"]>p {
             text-align: center;
         }
 
         .option-4 {
+            display: flex;
             width: 25%;
         }
 
-        input[type='radio'] {
+        input[type="radio"] {
             cursor: pointer;
+            display: flex;
+            flex-wrap: wrap;
         }
 
         #banner {
@@ -51,12 +62,21 @@
         }
 
         #donatebutton {
+            position: relative;
             float: right;
         }
 
         .link {
             text-decoration: underline;
             cursor: pointer;
+        }
+
+        #donate {
+            display: none;
+            width: 100%;
+            /* padding: 0 1%; */
+            overflow-wrap: break-word;
+            box-sizing: border-box;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -70,76 +90,109 @@
                 color: #b7b7b7;
             }
         }
+
+        @-moz-document url-prefix() {
+            @media screen and (max-width: 348px) {
+                body {
+                    width: 100%;
+                }
+
+                #banner {
+                    display: none;
+                }
+
+                .option-4 {
+                    width: 50%;
+                }
+
+                .optionsContainer div[class^="option-"] {
+                    flex-direction: row-reverse;
+                    justify-content: left;
+                }
+
+                .title {
+                    margin: 1% 0;
+                }
+            }
+        }
     </style>
 </head>
+
 <body>
-<div id="banner">Clickbait Remover for Youtube</div>
-<div class="container">
-    <div id="settings">
-        <h3 data-localize="__MSG_whereToGrabTheThumbnailImage__">Where to grab the thumbnail image:</h3>
-        <div class="optionsContainer">
-            <div class="option-4">
-                <p data-localize="__MSG_startOfTheVideo__">Start of the video</p>
-                <label for="preferred_thumbnail_file_hq1"></label>
-                <input type="radio" value="hq1" id="preferred_thumbnail_file_hq1" name="preferred_thumbnail_file">
+    <div id="banner">Clickbait Remover for Youtube</div>
+    <div class="container">
+        <div id="settings">
+            <h3 class="title" data-localize="__MSG_whereToGrabTheThumbnailImage__">Where to grab the thumbnail image:
+            </h3>
+            <div class="optionsContainer">
+                <div class="option-4">
+                    <p data-localize="__MSG_startOfTheVideo__">Start of the video</p>
+                    <label for="preferred_thumbnail_file_hq1"></label>
+                    <input type="radio" value="hq1" id="preferred_thumbnail_file_hq1" name="preferred_thumbnail_file" />
+                </div>
+                <div class="option-4">
+                    <p data-localize="__MSG_middleOfTheVideo__">Middle of the video</p>
+                    <label for="preferred_thumbnail_file_hq2"></label>
+                    <input type="radio" value="hq2" id="preferred_thumbnail_file_hq2" name="preferred_thumbnail_file" />
+                </div>
+                <div class="option-4">
+                    <p data-localize="__MSG_endOfTheVideo__">End of the video</p>
+                    <label for="preferred_thumbnail_file_hq3"></label>
+                    <input type="radio" value="hq3" id="preferred_thumbnail_file_hq3" name="preferred_thumbnail_file" />
+                </div>
+                <div class="option-4">
+                    <p data-localize="__MSG_doNotModify__">Do not modify</p>
+                    <label for="preferred_thumbnail_file_default"></label>
+                    <input type="radio" value="hqdefault" id="preferred_thumbnail_file_default"
+                        name="preferred_thumbnail_file" />
+                </div>
             </div>
-            <div class="option-4">
-                <p data-localize="__MSG_middleOfTheVideo__">Middle of the video</p>
-                <label for="preferred_thumbnail_file_hq2"></label>
-                <input type="radio" value="hq2" id="preferred_thumbnail_file_hq2" name="preferred_thumbnail_file">
-            </div>
-            <div class="option-4">
-                <p data-localize="__MSG_endOfTheVideo__">End of the video</p>
-                <label for="preferred_thumbnail_file_hq3"></label>
-                <input type="radio" value="hq3" id="preferred_thumbnail_file_hq3" name="preferred_thumbnail_file">
-            </div>
-            <div class="option-4">
-                <p data-localize="__MSG_doNotModify__">Do not modify</p>
-                <label for="preferred_thumbnail_file_default"></label>
-                <input type="radio" value="hqdefault" id="preferred_thumbnail_file_default" name="preferred_thumbnail_file">
+
+            <h3 class="title" data-localize="__MSG_howToFormatTheVideoTitles__">How to format the video titles:</h3>
+            <div class="optionsContainer">
+                <div class="option-4">
+                    <p data-localize="__MSG_lowercase__">lowercase</p>
+                    <label for="video_title_format_lowercase"></label>
+                    <input type="radio" value="lowercase" id="video_title_format_lowercase" name="video_title_format" />
+                </div>
+                <div class="option-4">
+                    <p data-localize="__MSG_capitaliseSentence__">Capitalise sentence</p>
+                    <label for="video_title_format_capitalize_first_letter"></label>
+                    <input type="radio" value="capitalize_first_letter" id="video_title_format_capitalize_first_letter"
+                        name="video_title_format" />
+                </div>
+                <div class="option-4">
+                    <p data-localize="__MSG_capitaliseWords__">Capitalise Words</p>
+                    <label for="video_title_format_capitalise_words"></label>
+                    <input type="radio" value="capitalise_words" id="video_title_format_capitalise_words"
+                        name="video_title_format" />
+                </div>
+                <div class="option-4">
+                    <p data-localize="__MSG_doNotModify__">Do not modify</p>
+                    <label for="video_title_format_default"></label>
+                    <input type="radio" value="default" id="video_title_format_default" name="video_title_format" />
+                </div>
             </div>
         </div>
-
-        <h3 data-localize="__MSG_howToFormatTheVideoTitles__">How to format the video titles:</h3>
-        <div class="optionsContainer">
-            <div class="option-4">
-                <p data-localize="__MSG_lowercase__">lowercase</p>
-                <label for="video_title_format_lowercase"></label>
-                <input type="radio" value="lowercase" id="video_title_format_lowercase" name="video_title_format">
-            </div>
-            <div class="option-4">
-                <p data-localize="__MSG_capitaliseSentence__">Capitalise sentence</p>
-                <label for="video_title_format_capitalize_first_letter"></label>
-                <input type="radio" value="capitalize_first_letter" id="video_title_format_capitalize_first_letter"
-                       name="video_title_format">
-            </div>
-            <div class="option-4">
-                <p data-localize="__MSG_capitaliseWords__">Capitalise Words</p>
-                <label for="video_title_format_capitalise_words"></label>
-                <input type="radio" value="capitalise_words" id="video_title_format_capitalise_words"
-                       name="video_title_format">
-            </div>
-            <div class="option-4">
-                <p data-localize="__MSG_doNotModify__">Do not modify</p>
-                <label for="video_title_format_default"></label>
-                <input type="radio" value="default" id="video_title_format_default" name="video_title_format">
-            </div>
+        <div id="donate" style="display: none">
+            <h3 data-localize="__MSG_thanksForDonating__">Thanks that you are considering donating!</h3>
+            <b>Paypal</b>
+            <div class="link" id="paypallink">paypal.me/pietervanheijningen</div>
+            <br />
+            <b>Bitcoin</b>
+            <div>36BYRkf1bFcdAEkxKicoFrEKiWM4Voi8Th</div>
+            <br />
+            <b>Ethereum (only ETH)</b>
+            <div>0xbe2cBF10Daf544b0C07D5aEBf3D39F563b28C276</div>
+            <br />
+            <b>Nano</b>
+            <div>nano_1ywgrzesdgygymw8qdspznio7wc98q8sgbcfd7tbpfwkwx1d4xmm8zkrx6i8</div>
+            <br />
         </div>
-    </div>
-    <div id="donate" style="display: none">
-        <h3 data-localize="__MSG_thanksForDonating__">Thanks that you are considering donating!</h3>
-        <b>Paypal</b> <div class="link" id="paypallink">paypal.me/pietervanheijningen</div>
-        <br>
-        <b>Bitcoin</b> <div>36BYRkf1bFcdAEkxKicoFrEKiWM4Voi8Th</div>
-        <br>
-        <b>Ethereum (only ETH)</b> <div>0xbe2cBF10Daf544b0C07D5aEBf3D39F563b28C276</div>
-        <br>
-        <b>Nano</b> <div>nano_1ywgrzesdgygymw8qdspznio7wc98q8sgbcfd7tbpfwkwx1d4xmm8zkrx6i8</div>
-        <br>
-    </div>
 
-    <p id="donatebutton" class="link" data-localize="__MSG_donate__">Donate!</p>
-</div>
+        <p id="donatebutton" class="link" data-localize="__MSG_donate__">Donate!</p>
+    </div>
 </body>
 <script src="js/options_popup.js"></script>
+
 </html>
