@@ -1,3 +1,6 @@
+## 0.6
+- Fix layout issue on firefox (Thanks David Yaacov!)
+
 ## 0.5
 - Add donate screen
 
