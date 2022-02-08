@@ -4,51 +4,51 @@
     "description": "Name of the extension."
   },
   "extensionDescription": {
-    "message": "Replaces thumbnails and modifies titles of videos on youtube.com",
+    "message": "youtube.com'daki videoların kapak fotoğraflarını ve başlıklarını değiştirir",
     "description": "Description of the extension."
   },
   "whereToGrabTheThumbnailImage": {
-    "message": "Where to grab the thumbnail image:",
+    "message": "Kapak fotoğrafları nereden alınsın:",
     "description": ""
   },
   "startOfTheVideo": {
-    "message": "Start of the video",
+    "message": "Videonun başından",
     "description": ""
   },
   "middleOfTheVideo": {
-    "message": "Middle of the video",
+    "message": "Videonun ortasından",
     "description": ""
   },
   "endOfTheVideo": {
-    "message": "End of the video",
+    "message": "Videonun sonundan",
     "description": ""
   },
   "doNotModify": {
-    "message": "Do not modify",
+    "message": "Değiştirme",
     "description": ""
   },
   "howToFormatTheVideoTitles": {
-    "message": "How to format the video titles:",
+    "message": "Video başlıkları nasıl biçimlendirilsin",
     "description": ""
   },
   "lowercase": {
-    "message": "lowercase",
+    "message": "bütün harfler küçük",
     "description": ""
   },
   "capitaliseSentence": {
-    "message": "Capitalise sentence",
+    "message": "Cümlenin ilk harfi büyük",
     "description": ""
   },
   "capitaliseWords": {
-    "message": "Capitalise Words",
+    "message": "Kelimelerin İlk harfi Büyük",
     "description": ""
   },
   "donate": {
-    "message": "Donate!",
+    "message": "Bağış!",
     "description": ""
   },
   "thanksForDonating": {
-    "message": "Thanks that you are considering donating!",
+    "message": "Bağış yaptığınız için teşekkürler!",
     "description": ""
   }
 }
