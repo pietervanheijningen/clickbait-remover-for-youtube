@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "Clickbait Remover for Youtube",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Replaces thumbnails and modifies titles of videos on youtube.com",
+    "description": "Description of the extension."
+  },
+  "whereToGrabTheThumbnailImage": {
+    "message": "Where to grab the thumbnail image:",
+    "description": ""
+  },
+  "startOfTheVideo": {
+    "message": "Start of the video",
+    "description": ""
+  },
+  "middleOfTheVideo": {
+    "message": "Middle of the video",
+    "description": ""
+  },
+  "endOfTheVideo": {
+    "message": "End of the video",
+    "description": ""
+  },
+  "doNotModify": {
+    "message": "Do not modify",
+    "description": ""
+  },
+  "howToFormatTheVideoTitles": {
+    "message": "How to format the video titles:",
+    "description": ""
+  },
+  "lowercase": {
+    "message": "lowercase",
+    "description": ""
+  },
+  "capitaliseSentence": {
+    "message": "Capitalise sentence",
+    "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Capitalise Words",
+    "description": ""
+  },
+  "donate": {
+    "message": "Donate!",
+    "description": ""
+  },
+  "thanksForDonating": {
+    "message": "Thanks that you are considering donating!",
+    "description": ""
+  }
+}
