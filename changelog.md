@@ -1,3 +1,6 @@
+## 0.6.1
+- Add Turkish translation
+
 ## 0.6
 - Fix layout issue on firefox (Thanks David Yaacov!)
 

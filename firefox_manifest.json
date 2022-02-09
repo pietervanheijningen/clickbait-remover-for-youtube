@@ -3,7 +3,7 @@
   "name": "Clickbait Remover for Youtube",
   "short_name": "Clickbait Remover",
   "default_locale": "en",
-  "version": "0.6",
+  "version": "0.6.1",
   "description": "Replaces thumbnails and modifies titles of videos on youtube.com",
   "content_scripts": [
     {
