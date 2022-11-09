@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "regexSubstitution": "https://i.ytimg.com/vi/\\1/hq3.jpg\\2"
+      }
+    },
+    "condition": {
+      "regexFilter": "^https://i.ytimg.com/vi/(.*)/hqdefault.jpg(.*)",
+      "resourceTypes": [
+        "image"
+      ]
+    }
+  }
+]

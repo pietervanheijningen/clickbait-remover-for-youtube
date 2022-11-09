@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "short_name": "Clickbait Remover",
   "default_locale": "en",
@@ -17,12 +17,9 @@
     }
   ],
   "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": true
+    "service_worker": "js/background.js"
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "images/clickbait_remover_icon16.png",
       "32": "images/clickbait_remover_icon32.png"
@@ -36,13 +33,35 @@
     "48": "images/clickbait_remover_icon48.png",
     "128": "images/clickbait_remover_icon128.png"
   },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "hq1",
+        "enabled": false,
+        "path": "requestRules/hq1.json"
+      },
+      {
+        "id": "hq2",
+        "enabled": false,
+        "path": "requestRules/hq2.json"
+      },
+      {
+        "id": "hq3",
+        "enabled": false,
+        "path": "requestRules/hq3.json"
+      }
+    ]
+  },
   "permissions": [
+    "storage",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
     "*://www.youtube.com/*",
     "*://m.youtube.com/*",
-    "*://i.ytimg.com/*",
-    "webRequest",
-    "storage",
-    "webRequestBlocking",
-    "activeTab"
+    "*://i.ytimg.com/*"
   ]
 }
