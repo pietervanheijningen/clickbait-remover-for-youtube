@@ -48,18 +48,33 @@ self.addEventListener('activate', function () {
 })
 
 function setupThumbnailRedirectListeners(preferredThumbnailFile) {
-    let options = ['hq1', 'hq2', 'hq3']
-
     if (preferredThumbnailFile === 'hqdefault') {
-        chrome.declarativeNetRequest.updateEnabledRulesets({
-            disableRulesetIds: options
+        chrome.declarativeNetRequest.updateDynamicRules({
+            removeRuleIds: [1,2,3]
         })
     } else {
-        console.log(options.filter(x => x !== preferredThumbnailFile))
-        console.log([preferredThumbnailFile])
-        chrome.declarativeNetRequest.updateEnabledRulesets({
-            disableRulesetIds: options.filter(x => x !== preferredThumbnailFile),
-            enableRulesetIds: [preferredThumbnailFile]
+        const ruleId = parseInt(preferredThumbnailFile.match(/\d+/)[0])
+
+        chrome.declarativeNetRequest.updateDynamicRules({
+            addRules: [
+                {
+                    "id": ruleId,
+                    "priority": 1,
+                    "action": {
+                        "type": "redirect",
+                        "redirect": {
+                            "regexSubstitution": `https://i.ytimg.com/\\1/\\2/${preferredThumbnailFile}.jpg\\4`
+                        }
+                    },
+                    "condition": {
+                        "regexFilter": "^https://i.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720).jpg(.*)",
+                        "resourceTypes": [
+                            "image"
+                        ]
+                    }
+                }
+            ],
+            removeRuleIds: [1,2,3]
         })
     }
 }

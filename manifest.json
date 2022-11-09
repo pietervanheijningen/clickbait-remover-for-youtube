@@ -33,25 +33,6 @@
     "48": "images/clickbait_remover_icon48.png",
     "128": "images/clickbait_remover_icon128.png"
   },
-  "declarative_net_request": {
-    "rule_resources": [
-      {
-        "id": "hq1",
-        "enabled": false,
-        "path": "requestRules/hq1.json"
-      },
-      {
-        "id": "hq2",
-        "enabled": false,
-        "path": "requestRules/hq2.json"
-      },
-      {
-        "id": "hq3",
-        "enabled": false,
-        "path": "requestRules/hq3.json"
-      }
-    ]
-  },
   "permissions": [
     "storage",
     "declarativeNetRequest",
