@@ -8,18 +8,6 @@ chrome.runtime.onInstalled.addListener(function ({reason}) {
     }
 });
 
-chrome.storage.onChanged.addListener(function (changes) {
-    if (changes.preferred_thumbnail_file !== undefined) {
-        setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
-    }
-
-    chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
-        tabs.forEach(function (tab) {
-            chrome.tabs.sendMessage(tab.id, changes);
-        })
-    });
-});
-
 self.addEventListener('activate', function () {
 
     chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
@@ -43,6 +31,18 @@ self.addEventListener('activate', function () {
                     }
                 )
             })
+
+            chrome.storage.onChanged.addListener(function (changes) {
+                if (changes.preferred_thumbnail_file !== undefined) {
+                    setupThumbnailRedirectListeners(changes.preferred_thumbnail_file.newValue);
+                }
+
+                chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
+                    tabs.forEach(function (tab) {
+                        chrome.tabs.sendMessage(tab.id, changes);
+                    })
+                });
+            });
         });
     });
 })
