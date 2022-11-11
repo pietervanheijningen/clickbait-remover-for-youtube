@@ -1,3 +1,6 @@
+## 0.6.2
+- Add top donations list
+
 ## 0.6.1
 - Add Turkish translation
 
