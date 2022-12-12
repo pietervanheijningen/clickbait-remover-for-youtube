@@ -10,6 +10,10 @@ chrome.runtime.onInstalled.addListener(function ({reason}) {
 
 chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 
+    if (storage.preferred_thumbnail_file === undefined) { // shitty fix
+        storage.preferred_thumbnail_file = "hq1"
+    }
+
     setupThumbnailRedirectListeners(storage.preferred_thumbnail_file);
 
     chrome.tabs.query({url: '*://www.youtube.com/*'}, function (tabs) {
@@ -47,15 +51,13 @@ chrome.storage.sync.get(['preferred_thumbnail_file'], function (storage) {
 function setupThumbnailRedirectListeners(preferredThumbnailFile) {
     if (preferredThumbnailFile === 'hqdefault') {
         chrome.declarativeNetRequest.updateDynamicRules({
-            removeRuleIds: [1,2,3]
+            removeRuleIds: [1]
         })
     } else {
-        const ruleId = parseInt(preferredThumbnailFile.match(/\d+/)[0])
-
         chrome.declarativeNetRequest.updateDynamicRules({
             addRules: [
                 {
-                    "id": ruleId,
+                    "id": 1,
                     "priority": 1,
                     "action": {
                         "type": "redirect",
@@ -71,7 +73,7 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
                     }
                 }
             ],
-            removeRuleIds: [1,2,3]
+            removeRuleIds: [1]
         })
     }
 }
