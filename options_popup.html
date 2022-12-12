@@ -74,9 +74,33 @@
         #donate {
             display: none;
             width: 100%;
-            /* padding: 0 1%; */
             overflow-wrap: break-word;
             box-sizing: border-box;
+        }
+
+        #donate > div {
+            display: inline;
+            float: left;
+        }
+
+        .donationOptions {
+            width: 60%;
+        }
+
+        .donationsList {
+            width: 40%;
+        }
+
+        .donationsList > ol {
+            padding-inline-start: 16px;
+        }
+
+        .donationsList > ol > li > * {
+            display: inline;
+        }
+
+        .donationsList > ol > li > .amount {
+            color: rgb(147, 255, 101);
         }
 
         @media (prefers-color-scheme: dark) {
@@ -175,19 +199,28 @@
             </div>
         </div>
         <div id="donate" style="display: none">
-            <h3 data-localize="__MSG_thanksForDonating__">Thanks that you are considering donating!</h3>
-            <b>Paypal</b>
-            <div class="link" id="paypallink">paypal.me/pietervanheijningen</div>
-            <br />
-            <b>Bitcoin</b>
-            <div>36BYRkf1bFcdAEkxKicoFrEKiWM4Voi8Th</div>
-            <br />
-            <b>Ethereum (only ETH)</b>
-            <div>0xbe2cBF10Daf544b0C07D5aEBf3D39F563b28C276</div>
-            <br />
-            <b>Nano</b>
-            <div>nano_1ywgrzesdgygymw8qdspznio7wc98q8sgbcfd7tbpfwkwx1d4xmm8zkrx6i8</div>
-            <br />
+            <h3 data-localize="__MSG_thanksForDonating__">Thanks that you are considering donating! :D</h3>
+            <div class="donationOptions">
+                <b>Paypal</b>
+                <div class="link" id="paypallink">paypal.me/pietervanheijningen</div>
+                <br />
+                <b>Bitcoin</b>
+                <div>36BYRkf1bFcdAEkxKicoFrEKiWM4Voi8Th</div>
+                <br />
+                <b>Ethereum (only ETH)</b>
+                <div>0xbe2cBF10Daf544b0C07D5aEBf3D39F563b28C276</div>
+                <br />
+                <b>Nano</b>
+                <div>nano_1ywgrzesdgygymw8qdspznio7wc98q8sgbcfd7tbpfwkwx1d4xmm8zkrx6i8</div>
+                <br />
+            </div>
+            <div class="donationsList">
+                <b>Top donations</b>
+                <ol>
+                    <li><div class="amount">$5.11</div><i> - Dmitry Ahanchonok</i> </li>
+                    <li><div class="amount">$3.13</div><i> - Anonymous</i> </li>
+                </ol>
+            </div>
         </div>
 
         <p id="donatebutton" class="link" data-localize="__MSG_donate__">Donate!</p>
