@@ -1,3 +1,8 @@
+## 0.7
+- Update codebase to manifest v3
+- Bug 1: "Do not modify" button for thumbnails does not work after reload
+- Bug 2: Thumbnails for premiere videos are broken
+
 ## 0.6.2
 - Add top donations list
 
