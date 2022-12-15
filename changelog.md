@@ -1,3 +1,6 @@
+## 0.7.1
+- Remove unnecessary permission
+
 ## 0.7
 - Update codebase to manifest v3
 - Bug 1: "Do not modify" button for thumbnails does not work after reload
