@@ -1,3 +1,6 @@
+## 0.7.2
+- Update donations list
+
 ## 0.7.1
 - Remove unnecessary permission
 
