@@ -1,3 +1,8 @@
+## 0.8
+- Add Arabic and French translations (Thanks macro010!)
+- Fix video titles not changing on mobile
+- Make donation button green (hint hint :D)
+
 ## 0.7.3
 - Remove unused permission
 
