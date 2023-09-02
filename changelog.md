@@ -1,3 +1,6 @@
+## 0.9
+- Add fix for Youtube's new thumbnail A/B testing feature. (Thanks sb-o!)
+
 ## 0.8
 - Add Arabic and French translations (Thanks macro010!)
 - Fix video titles not changing on mobile
