@@ -6,4 +6,3 @@ Replaces thumbnails and modifies titles of videos on youtube.com
 
 Chrome store: https://chrome.google.com/webstore/detail/clickbait-remover-for-you/omoinegiohhgbikclijaniebjpkeopip    
 Firefox store: https://addons.mozilla.org/en-US/firefox/addon/clickbait-remover-for-youtube/  
-Mac/Safari App store (Maintained by [@Casuallynoted](https://github.com/Casuallynoted)): https://apps.apple.com/us/app/clickbait-remover-for-youtube/id1602934803?mt=12
