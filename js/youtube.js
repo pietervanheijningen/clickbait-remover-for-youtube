@@ -104,9 +104,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
         let imgElements = document.getElementsByTagName('img');
 
         for (let i = 0; i < imgElements.length; i++) {
-            if (imgElements[i].src.match('https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720|hq720_custom_[0-9]+).jpg?.*')) {
+            if (imgElements[i].src.match('https://i.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
 
-                let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720|hq720_custom_[0-9]+).jpg/, `${newImage}.jpg`);
+                let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg/, `${newImage}.jpg`);
 
                 if (!url.match('.*stringtokillcache')) {
                     url += '?stringtokillcache'
@@ -121,9 +121,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
         for (let i = 0; i < backgroundImgElements.length; i++) {
             let styleAttribute = backgroundImgElements[i].getAttribute('style');
 
-            if (styleAttribute.match('.*https://i.ytimg.com/vi/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720|hq720_custom_[0-9]+).jpg?.*')) {
+            if (styleAttribute.match('.*https://i.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
 
-                let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720|hq720_custom_[0-9]+).jpg/, `${newImage}.jpg`);
+                let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg/, `${newImage}.jpg`);
 
                 if (!newStyleAttribute.match('.*stringtokillcache.*')) {
                     // messes up existing query parameters that might be there, but that's ok.
