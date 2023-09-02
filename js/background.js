@@ -62,11 +62,11 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
                     "action": {
                         "type": "redirect",
                         "redirect": {
-                            "regexSubstitution": `https://i.ytimg.com/\\1/\\2/${preferredThumbnailFile}.jpg\\4`
+                            "regexSubstitution": `https://i.ytimg.com/\\1/\\2/${preferredThumbnailFile}.jpg\\5`
                         }
                     },
                     "condition": {
-                        "regexFilter": "^https://i.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720).jpg(.*)",
+                        "regexFilter": "^https://i.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720)(_custom_[0-9]+)?.jpg(.*)",
                         "resourceTypes": [
                             "image"
                         ]
