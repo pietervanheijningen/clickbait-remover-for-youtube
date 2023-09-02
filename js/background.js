@@ -66,7 +66,7 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
                         }
                     },
                     "condition": {
-                        "regexFilter": "^https://i.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720).jpg(.*)",
+                        "regexFilter": "^https://i.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720|hq720_custom_[0-9]+).jpg(.*)",
                         "resourceTypes": [
                             "image"
                         ]
