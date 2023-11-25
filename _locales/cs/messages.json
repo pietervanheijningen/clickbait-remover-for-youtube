@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "Clickbait Remover for Youtube",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Nahradí miniatury a upraví názvy videí na youtube.com",
+    "description": "Description of the extension."
+  },
+  "whereToGrabTheThumbnailImage": {
+    "message": "Odkud vzít obrázek miniatury:",
+    "description": ""
+  },
+  "startOfTheVideo": {
+    "message": "Začátek videa",
+    "description": ""
+  },
+  "middleOfTheVideo": {
+    "message": "Prostředek videa",
+    "description": ""
+  },
+  "endOfTheVideo": {
+    "message": "Konec videa",
+    "description": ""
+  },
+  "doNotModify": {
+    "message": "Nemodifikovat",
+    "description": ""
+  },
+  "howToFormatTheVideoTitles": {
+    "message": "Jak upravit názvy videí:",
+    "description": ""
+  },
+  "lowercase": {
+    "message": "malá písmena",
+    "description": ""
+  },
+  "capitaliseSentence": {
+    "message": "Velká písmena začátků vět",
+    "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Velká písmena slov",
+    "description": ""
+  },
+  "donate": {
+    "message": "Přispějte!",
+    "description": ""
+  },
+  "thanksForDonating": {
+    "message": "Děkujeme, že zvažujete přispění! :D",
+    "description": ""
+  }
+}
