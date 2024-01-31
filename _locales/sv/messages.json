@@ -1,0 +1,54 @@
+{
+  "extensionName": {
+    "message": "Clickbait Remover for Youtube",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Ersätter miniatyrer, samt redigerar videotitlar på YouTube.com",
+    "description": "Description of the extension."
+  },
+  "whereToGrabTheThumbnailImage": {
+    "message": "Vart ska man ta miniatyrbilden ifrån:",
+    "description": ""
+  },
+  "startOfTheVideo": {
+    "message": "Början av videon",
+    "description": ""
+  },
+  "middleOfTheVideo": {
+    "message": "Mitten av videon",
+    "description": ""
+  },
+  "endOfTheVideo": {
+    "message": "Slutet av videon",
+    "description": ""
+  },
+  "doNotModify": {
+    "message": "Inga ändringar",
+    "description": ""
+  },
+  "howToFormatTheVideoTitles": {
+    "message": "Formattering av videotitlar:",
+    "description": ""
+  },
+  "lowercase": {
+    "message": "Endast små bokstäver",
+    "description": ""
+  },
+  "capitaliseSentence": {
+    "message": "Versalisera meningarna",
+    "description": ""
+  },
+  "capitaliseWords": {
+    "message": "Versaler I Varje Ord",
+    "description": ""
+  },
+  "donate": {
+    "message": "Donera!",
+    "description": ""
+  },
+  "thanksForDonating": {
+    "message": "Tack för att du överväger att ge ett bidrag! :D",
+    "description": ""
+  }
+}
