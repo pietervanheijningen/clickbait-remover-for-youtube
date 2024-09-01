@@ -66,12 +66,14 @@ function setupThumbnailRedirectListeners(preferredThumbnailFile) {
                         }
                     },
                     "condition": {
-                        "regexFilter": "^https://i.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720)(_custom_[0-9]+)?.jpg(.*)",
+                        "regexFilter": "^https://i9?.ytimg.com/(vi|vi_webp)/(.*)/(default|hqdefault|mqdefault|sddefault|hq720)(_custom_[0-9]+)?.jpg(.*)",
                         "resourceTypes": [
                             "image"
                         ]
                     }
                 }
+                
+
             ],
             removeRuleIds: [1]
         })
