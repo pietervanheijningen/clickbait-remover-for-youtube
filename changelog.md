@@ -1,3 +1,7 @@
+## 0.9.1
+- Add swedish translations
+- Add implementation for new thumbnail subdomain i9.ytimg.com
+
 ## 0.9
 - Add fix for Youtube's new thumbnail A/B testing feature. (Thanks sb-o!)
 
