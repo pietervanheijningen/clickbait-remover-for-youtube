@@ -1,4 +1,4 @@
-let optionKeys = ['preferred_thumbnail_file', 'video_title_format'];
+let optionKeys = ['preferred_thumbnail_file', 'preferred_thumbnail_resolution', 'video_title_format'];
 
 chrome.storage.sync.get(optionKeys, function (storage) {
     optionKeys.forEach(function (optionKey) {
