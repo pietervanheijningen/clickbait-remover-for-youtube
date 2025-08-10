@@ -42,7 +42,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 .ytp-videowall-still-info-title,
                 .large-media-item-metadata > a > h3 > span,
                 .media-item-metadata > a > h3 > span,
-                .compact-media-item-headline > span {
+                .compact-media-item-headline > span,
+                #title > h1 > yt-formatted-string,
+                .yt-lockup-metadata-view-model-wiz__text-container > h3 > a > span {
                     text-transform: lowercase;
                 }
             `;
@@ -54,7 +56,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 .ytp-videowall-still-info-title,
                 .large-media-item-metadata > a > h3 > span,
                 .media-item-metadata > a > h3 > span,
-                .compact-media-item-headline > span {
+                .compact-media-item-headline > span,
+                #title > h1 > yt-formatted-string,
+                .yt-lockup-metadata-view-model-wiz__text-container > h3 > a > span {
                     text-transform: lowercase;
                     display: block !important;
                 }
@@ -63,7 +67,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 .ytp-videowall-still-info-title::first-letter,
                 .large-media-item-metadata > a > h3 > span::first-letter,
                 .media-item-metadata > a > h3 > span::first-letter,
-                .compact-media-item-headline > span::first-letter {
+                .compact-media-item-headline > span::first-letter,
+                #title > h1 > yt-formatted-string::first-letter,
+                .yt-lockup-metadata-view-model-wiz__text-container > h3 > a > span::first-letter {
                     text-transform: uppercase;
                 }
             `;
@@ -75,7 +81,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 .ytp-videowall-still-info-title,
                 .large-media-item-metadata > a > h3 > span,
                 .media-item-metadata > a > h3 > span,
-                .compact-media-item-headline > span {
+                .compact-media-item-headline > span,
+                #title > h1 > yt-formatted-string,
+                .yt-lockup-metadata-view-model-wiz__text-container > h3 > a > span {
                     text-transform: lowercase;
                     display: block !important;
                 }
@@ -84,7 +92,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 .ytp-videowall-still-info-title::first-line,
                 .large-media-item-metadata > a > h3 > span::first-line,
                 .media-item-metadata > a > h3 > span::first-line,
-                .compact-media-item-headline > span::first-line {
+                .compact-media-item-headline > span::first-line,
+                #title > h1 > yt-formatted-string::first-line,
+                .yt-lockup-metadata-view-model-wiz__text-container > h3 > a > span::first-line {
                     text-transform: capitalize;
                 }
             `;
