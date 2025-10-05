@@ -19,8 +19,15 @@ const textElements = document.querySelectorAll('[data-localize]');
 textElements.forEach((e) => {
   const ref = e.dataset.localize;
   if (ref) {
-     const translated= ref.replace(/__MSG_(\w+)__/g, (match, theGroup) => chrome.i18n.getMessage(theGroup));
-    if (translated) {
+     const translated = ref.replace(/__MSG_(\w+)__/g, (match, theGroup) => {
+       try {
+         return chrome.i18n.getMessage(theGroup) || match;
+       } catch (error) {
+         console.log('Localization error:', error);
+         return match;
+       }
+     });
+    if (translated && translated !== ref) {
       e.innerText = translated;
     }
   }

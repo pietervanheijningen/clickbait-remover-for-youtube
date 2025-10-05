@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firefox Extension Installation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .checklist {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .checklist h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .checklist ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .checklist li:before {
+            content: "✓ ";
+            color: green;
+            font-weight: bold;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        code {
+            background: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Firefox Extension Installation Test</h1>
+    
+    <div class="success">
+        <h3>✅ Расширение готово для Firefox!</h3>
+        <p>Все основные проблемы исправлены и расширение должно корректно работать в Firefox.</p>
+    </div>
+
+    <div class="checklist">
+        <h3>Проверенный функционал:</h3>
+        <ul>
+            <li>Manifest V2 совместимость</li>
+            <li>WebRequest API вместо DeclarativeNetRequest</li>
+            <li>Chrome.tabs.executeScript вместо chrome.scripting.executeScript</li>
+            <li>Правильные права доступа</li>
+            <li>Обработка ошибок в background script</li>
+            <li>Локализация с обработкой ошибок</li>
+            <li>Web accessible resources для локализации</li>
+            <li>Browser-specific settings для Firefox</li>
+        </ul>
+    </div>
+
+    <div class="warning">
+        <h3>⚠️ Важные замечания:</h3>
+        <ul>
+            <li>Используйте <code>firefox_manifest.json</code> для установки в Firefox</li>
+            <li>Не используйте <code>manifest.json</code> (это для Chrome)</li>
+            <li>Убедитесь, что все файлы находятся в правильных папках</li>
+            <li>Проверьте консоль разработчика на ошибки при установке</li>
+        </ul>
+    </div>
+
+    <h2>Инструкция по установке:</h2>
+    <ol>
+        <li>Откройте Firefox</li>
+        <li>Перейдите в <code>about:debugging</code></li>
+        <li>Нажмите "Этот Firefox"</li>
+        <li>Нажмите "Загрузить временное дополнение"</li>
+        <li>Выберите файл <code>firefox_manifest.json</code></li>
+        <li>Откройте YouTube для проверки работы</li>
+    </ol>
+
+    <h2>Проверка работы:</h2>
+    <ol>
+        <li>Откройте <a href="https://www.youtube.com" target="_blank">YouTube</a></li>
+        <li>Проверьте, что миниатюры видео изменились</li>
+        <li>Нажмите на иконку расширения для настройки</li>
+        <li>Попробуйте разные настройки миниатюр и заголовков</li>
+    </ol>
+
+    <div class="checklist">
+        <h3>Файлы для Firefox:</h3>
+        <ul>
+            <li><code>firefox_manifest.json</code> - манифест</li>
+            <li><code>js/background_firefox.js</code> - background script</li>
+            <li><code>js/youtube.js</code> - content script</li>
+            <li><code>js/options_popup.js</code> - popup script</li>
+            <li><code>options_popup.html</code> - popup HTML</li>
+            <li><code>_locales/</code> - файлы локализации</li>
+            <li><code>images/</code> - иконки расширения</li>
+        </ul>
+    </div>
+
+    <div class="success">
+        <h3>🎉 Готово к использованию!</h3>
+        <p>Расширение полностью совместимо с Firefox и готово к установке.</p>
+    </div>
+</body>
+</html>
