@@ -101,6 +101,15 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
     }
 
     function updateThumbnails(newImage) {
+        // Show thumbnails first (in case they were hidden by empty option)
+        showThumbnails();
+        
+        // Handle empty option - hide thumbnails
+        if (newImage === 'empty') {
+            hideThumbnails();
+            return;
+        }
+
         let imgElements = document.getElementsByTagName('img');
 
         for (let i = 0; i < imgElements.length; i++) {
@@ -132,6 +141,64 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
 
                 backgroundImgElements[i].style = newStyleAttribute;
             }
+        }
+    }
+
+    function hideThumbnails() {
+        // Hide all YouTube thumbnail images
+        let imgElements = document.getElementsByTagName('img');
+
+        for (let i = 0; i < imgElements.length; i++) {
+            if (imgElements[i].src.match('https://i9?.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
+                imgElements[i].style.display = 'none';
+            }
+        }
+
+        // Hide background images in video walls and cards
+        let backgroundImgElements = document.querySelectorAll('.ytp-videowall-still-image, .iv-card-image');
+
+        for (let i = 0; i < backgroundImgElements.length; i++) {
+            let styleAttribute = backgroundImgElements[i].getAttribute('style');
+
+            if (styleAttribute.match('.*https://i9?.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
+                backgroundImgElements[i].style.display = 'none';
+            }
+        }
+
+        // Also hide thumbnail containers to prevent layout issues
+        let thumbnailContainers = document.querySelectorAll('ytd-thumbnail, .ytd-thumbnail, #thumbnail, .thumbnail');
+        
+        for (let i = 0; i < thumbnailContainers.length; i++) {
+            thumbnailContainers[i].style.display = 'none';
+        }
+    }
+
+    function showThumbnails() {
+        // Show all YouTube thumbnail images
+        let imgElements = document.getElementsByTagName('img');
+
+        for (let i = 0; i < imgElements.length; i++) {
+            if (imgElements[i].src.match('https://i9?.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
+                imgElements[i].style.display = '';
+            }
+        }
+
+        // Show background images in video walls and cards
+        let backgroundImgElements = document.querySelectorAll('.ytp-videowall-still-image, .iv-card-image');
+
+        for (let i = 0; i < backgroundImgElements.length; i++) {
+            let styleAttribute = backgroundImgElements[i].getAttribute('style');
+
+            if (styleAttribute.match('.*https://i9?.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
+                backgroundImgElements[i].style.display = '';
+            }
+        }
+
+        // Show thumbnail containers
+        let thumbnailContainers = document.querySelectorAll('ytd-thumbnail, .ytd-thumbnail, #thumbnail, .thumbnail');
+        
+        for (let i = 0; i < thumbnailContainers.length; i++) {
+            thumbnailContainers[i].style.display = '';
         }
     }
 }
