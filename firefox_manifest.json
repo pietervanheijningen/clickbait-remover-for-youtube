@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
-  "name": "Clickbait Remover for Youtube",
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
   "short_name": "Clickbait Remover",
   "default_locale": "en",
-  "version": "0.9",
-  "description": "Replaces thumbnails and modifies titles of videos on youtube.com",
+  "version": "0.9.1",
+  "description": "__MSG_extensionDescription__",
   "content_scripts": [
     {
       "matches": [
@@ -19,10 +19,9 @@
   "background": {
     "scripts": [
       "js/background.js"
-    ],
-    "persistent": true
+    ]
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "images/clickbait_remover_icon16.png",
       "32": "images/clickbait_remover_icon32.png"
@@ -37,17 +36,20 @@
     "128": "images/clickbait_remover_icon128.png"
   },
   "permissions": [
+    "storage",
+    "declarativeNetRequestWithHostAccess",
+    "scripting"
+  ],
+  "host_permissions": [
     "*://www.youtube.com/*",
     "*://m.youtube.com/*",
     "*://i.ytimg.com/*",
-    "webRequest",
-    "storage",
-    "webRequestBlocking",
-    "tabs"
+    "*://i9.ytimg.com/*"
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "cb-remover@search.mozilla.org"
+      "id": "cb-remover@search.mozilla.org",
+      "strict_min_version": "128.0"
     }
   }
 }

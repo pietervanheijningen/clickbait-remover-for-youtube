@@ -39,6 +39,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 //language=CSS
                 window.styleElement.innerHTML = `
                 #video-title,
+                .ytLockupMetadataViewModelTitle,
+                .yt-lockup-metadata-view-model__title,
+                .yt-lockup-metadata-view-model-wiz__title,
                 .ytp-videowall-still-info-title,
                 .large-media-item-metadata > a > h3 > span,
                 .media-item-metadata > a > h3 > span,
@@ -51,6 +54,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 //language=CSS
                 window.styleElement.innerHTML = `
                 #video-title,
+                .ytLockupMetadataViewModelTitle,
+                .yt-lockup-metadata-view-model__title,
+                .yt-lockup-metadata-view-model-wiz__title,
                 .ytp-videowall-still-info-title,
                 .large-media-item-metadata > a > h3 > span,
                 .media-item-metadata > a > h3 > span,
@@ -60,6 +66,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 }
 
                 #video-title::first-letter,
+                .ytLockupMetadataViewModelTitle::first-letter,
+                .yt-lockup-metadata-view-model__title::first-letter,
+                .yt-lockup-metadata-view-model-wiz__title::first-letter,
                 .ytp-videowall-still-info-title::first-letter,
                 .large-media-item-metadata > a > h3 > span::first-letter,
                 .media-item-metadata > a > h3 > span::first-letter,
@@ -72,6 +81,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 //language=CSS
                 window.styleElement.innerHTML = `
                 #video-title,
+                .ytLockupMetadataViewModelTitle,
+                .yt-lockup-metadata-view-model__title,
+                .yt-lockup-metadata-view-model-wiz__title,
                 .ytp-videowall-still-info-title,
                 .large-media-item-metadata > a > h3 > span,
                 .media-item-metadata > a > h3 > span,
@@ -81,6 +93,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
                 }
 
                 #video-title::first-line,
+                .ytLockupMetadataViewModelTitle::first-line,
+                .yt-lockup-metadata-view-model__title::first-line,
+                .yt-lockup-metadata-view-model-wiz__title::first-line,
                 .ytp-videowall-still-info-title::first-line,
                 .large-media-item-metadata > a > h3 > span::first-line,
                 .media-item-metadata > a > h3 > span::first-line,
@@ -100,16 +115,34 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
         }
     }
 
+    /*
+     * Cover or frame file name inside a thumbnail URL, e.g. ".../vi/<id>/hq720_custom_2.jpg"
+     * or ".../vi_webp/<id>/hqdefault.webp". Group 1 = name (+ _custom_N), group 2 = extension.
+     * Chapter frames ("hqdefault_26000.jpg") do not match: "_26000" is not "_custom_N".
+     * Must stay in sync with the DNR rule in background.js.
+     */
+    const THUMBNAIL_FILE = /\/(?:vi|vi_webp)\/[^/]+\/((?:hq1|hq2|hq3|default|hqdefault|mqdefault|sddefault|hq720)(?:_custom_[0-9]+)?)\.(jpg|webp)/;
+
+    /** Replaces the file name of a thumbnail URL found in `text`, keeping its extension. */
+    function swapThumbnailFile(text, newImage) {
+        return text.replace(THUMBNAIL_FILE, function (match, name, extension) {
+            return match.slice(0, match.length - name.length - extension.length - 1) + `${newImage}.${extension}`;
+        });
+    }
+
+    // Called when the user changes the preferred image in the popup: images already on
+    // screen were fetched before the new DNR rule, so their URLs are rewritten here.
     function updateThumbnails(newImage) {
         let imgElements = document.getElementsByTagName('img');
 
         for (let i = 0; i < imgElements.length; i++) {
-            if (imgElements[i].src.match('https://i9?.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
+            if (/^https:\/\/i9?\.ytimg\.com\//.test(imgElements[i].src) && THUMBNAIL_FILE.test(imgElements[i].src)) {
 
-                let url = imgElements[i].src.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg/, `${newImage}.jpg`);
+                let url = swapThumbnailFile(imgElements[i].src, newImage);
 
+                // Forces a new request (and thus the redirect) instead of the cached image.
                 if (!url.match('.*stringtokillcache')) {
-                    url += '?stringtokillcache'
+                    url += (url.includes('?') ? '&' : '?') + 'stringtokillcache'
                 }
 
                 imgElements[i].src = url;
@@ -121,9 +154,9 @@ if (typeof window.styleElement === 'undefined') { // shitty way to detect if scr
         for (let i = 0; i < backgroundImgElements.length; i++) {
             let styleAttribute = backgroundImgElements[i].getAttribute('style');
 
-            if (styleAttribute.match('.*https://i9?.ytimg.com/(vi|vi_webp)/.*/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg?.*')) {
+            if (styleAttribute && /https:\/\/i9?\.ytimg\.com\//.test(styleAttribute) && THUMBNAIL_FILE.test(styleAttribute)) {
 
-                let newStyleAttribute = styleAttribute.replace(/(hq1|hq2|hq3|hqdefault|mqdefault|hq720)(_custom_[0-9]+)?.jpg/, `${newImage}.jpg`);
+                let newStyleAttribute = swapThumbnailFile(styleAttribute, newImage);
 
                 if (!newStyleAttribute.match('.*stringtokillcache.*')) {
                     // messes up existing query parameters that might be there, but that's ok.
